@@ -20,7 +20,7 @@ public interface HjInfoDao {
 	 * @return
 	 */
 	@Select("select * FROM  CON_HJ_INFO  ")
-	public ConHjInfo getAll();
+	public List<ConHjInfo> getAll();
 
 	/**
 	 * 查询当前在工作工序

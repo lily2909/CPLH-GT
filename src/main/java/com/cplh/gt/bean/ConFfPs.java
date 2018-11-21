@@ -1,9 +1,5 @@
 package com.cplh.gt.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -13,8 +9,6 @@ import java.util.Objects;
  */
 
 
-@Entity
-@Table(name = "CON_FF_PS", schema = "public", catalog = "postgres")
 public class ConFfPs {
 	private String weldCode;
 	private String equipCode;
@@ -34,8 +28,6 @@ public class ConFfPs {
 	private String extend9;
 	private String extend10;
 
-	@Basic
-	@Column(name = "weld_code")
 	public String getWeldCode() {
 		return weldCode;
 	}
@@ -43,9 +35,6 @@ public class ConFfPs {
 	public void setWeldCode(String weldCode) {
 		this.weldCode = weldCode;
 	}
-
-	@Basic
-	@Column(name = "equip_code")
 	public String getEquipCode() {
 		return equipCode;
 	}
@@ -54,8 +43,6 @@ public class ConFfPs {
 		this.equipCode = equipCode;
 	}
 
-	@Basic
-	@Column(name = "equip_code_cdp")
 	public String getEquipCodeCdp() {
 		return equipCodeCdp;
 	}
@@ -64,8 +51,6 @@ public class ConFfPs {
 		this.equipCodeCdp = equipCodeCdp;
 	}
 
-	@Basic
-	@Column(name = "person_code")
 	public String getPersonCode() {
 		return personCode;
 	}
@@ -74,8 +59,6 @@ public class ConFfPs {
 		this.personCode = personCode;
 	}
 
-	@Basic
-	@Column(name = "stress")
 	public Long getStress() {
 		return stress;
 	}
@@ -84,8 +67,6 @@ public class ConFfPs {
 		this.stress = stress;
 	}
 
-	@Basic
-	@Column(name = "status")
 	public String getStatus() {
 		return status;
 	}
@@ -94,8 +75,6 @@ public class ConFfPs {
 		this.status = status;
 	}
 
-	@Basic
-	@Column(name = "ts")
 	public Timestamp getTs() {
 		return ts;
 	}
@@ -104,8 +83,6 @@ public class ConFfPs {
 		this.ts = ts;
 	}
 
-	@Basic
-	@Column(name = "extend1")
 	public String getExtend1() {
 		return extend1;
 	}
@@ -114,8 +91,6 @@ public class ConFfPs {
 		this.extend1 = extend1;
 	}
 
-	@Basic
-	@Column(name = "extend2")
 	public String getExtend2() {
 		return extend2;
 	}
@@ -124,8 +99,6 @@ public class ConFfPs {
 		this.extend2 = extend2;
 	}
 
-	@Basic
-	@Column(name = "extend3")
 	public String getExtend3() {
 		return extend3;
 	}
@@ -134,8 +107,6 @@ public class ConFfPs {
 		this.extend3 = extend3;
 	}
 
-	@Basic
-	@Column(name = "extend4")
 	public String getExtend4() {
 		return extend4;
 	}
@@ -144,8 +115,6 @@ public class ConFfPs {
 		this.extend4 = extend4;
 	}
 
-	@Basic
-	@Column(name = "extend5")
 	public String getExtend5() {
 		return extend5;
 	}
@@ -153,9 +122,6 @@ public class ConFfPs {
 	public void setExtend5(String extend5) {
 		this.extend5 = extend5;
 	}
-
-	@Basic
-	@Column(name = "extend6")
 	public String getExtend6() {
 		return extend6;
 	}
@@ -164,8 +130,6 @@ public class ConFfPs {
 		this.extend6 = extend6;
 	}
 
-	@Basic
-	@Column(name = "extend7")
 	public String getExtend7() {
 		return extend7;
 	}
@@ -174,8 +138,6 @@ public class ConFfPs {
 		this.extend7 = extend7;
 	}
 
-	@Basic
-	@Column(name = "extend8")
 	public String getExtend8() {
 		return extend8;
 	}
@@ -184,8 +146,6 @@ public class ConFfPs {
 		this.extend8 = extend8;
 	}
 
-	@Basic
-	@Column(name = "extend9")
 	public String getExtend9() {
 		return extend9;
 	}
@@ -194,8 +154,6 @@ public class ConFfPs {
 		this.extend9 = extend9;
 	}
 
-	@Basic
-	@Column(name = "extend10")
 	public String getExtend10() {
 		return extend10;
 	}

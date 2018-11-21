@@ -26,6 +26,7 @@ import java.util.List;
 public class GtService {
 	@Autowired
 	HjInfoDao hjInfoDao;
+
 	@Autowired
 	PrWeldReationDao prWeldReationDao;
 
@@ -295,10 +296,12 @@ public class GtService {
 	 * @return
 	 */
 	public QueryPro sysWeldPro(String weld_code, String pr_no) {
-
-		prWeldReationDao.insert(weld_code, pr_no);
+		Integer insert = prWeldReationDao.insert(weld_code, pr_no);
 		QueryPro out = new QueryPro();
 		out.setSuccess(true);
+		HashMap<String, Object> objectObjectHashMap = new HashMap<>();
+		objectObjectHashMap.put("count",insert);
+		out.setData(objectObjectHashMap);
 		out.set_MSG_("同步成功");
 		return out;
 	}

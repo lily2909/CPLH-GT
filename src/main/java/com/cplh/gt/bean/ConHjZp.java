@@ -1,9 +1,5 @@
 package com.cplh.gt.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -13,8 +9,6 @@ import java.util.Objects;
  */
 
 
-@Entity
-@Table(name = "CON_HJ_ZP", schema = "public", catalog = "postgres")
 public class ConHjZp {
 	private String weldCode;
 	private String equipCode;
@@ -37,8 +31,6 @@ public class ConHjZp {
 	private String extend9;
 	private String extend10;
 
-	@Basic
-	@Column(name = "weld_code")
 	public String getWeldCode() {
 		return weldCode;
 	}
@@ -47,8 +39,6 @@ public class ConHjZp {
 		this.weldCode = weldCode;
 	}
 
-	@Basic
-	@Column(name = "equip_code")
 	public String getEquipCode() {
 		return equipCode;
 	}
@@ -57,8 +47,6 @@ public class ConHjZp {
 		this.equipCode = equipCode;
 	}
 
-	@Basic
-	@Column(name = "equip_code_cdp")
 	public String getEquipCodeCdp() {
 		return equipCodeCdp;
 	}
@@ -67,8 +55,6 @@ public class ConHjZp {
 		this.equipCodeCdp = equipCodeCdp;
 	}
 
-	@Basic
-	@Column(name = "person_code")
 	public String getPersonCode() {
 		return personCode;
 	}
@@ -77,8 +63,6 @@ public class ConHjZp {
 		this.personCode = personCode;
 	}
 
-	@Basic
-	@Column(name = "temp00")
 	public String getTemp00() {
 		return temp00;
 	}
@@ -87,8 +71,6 @@ public class ConHjZp {
 		this.temp00 = temp00;
 	}
 
-	@Basic
-	@Column(name = "temp03")
 	public String getTemp03() {
 		return temp03;
 	}
@@ -97,8 +79,6 @@ public class ConHjZp {
 		this.temp03 = temp03;
 	}
 
-	@Basic
-	@Column(name = "temp06")
 	public String getTemp06() {
 		return temp06;
 	}
@@ -106,9 +86,6 @@ public class ConHjZp {
 	public void setTemp06(String temp06) {
 		this.temp06 = temp06;
 	}
-
-	@Basic
-	@Column(name = "temp09")
 	public String getTemp09() {
 		return temp09;
 	}
@@ -117,8 +94,6 @@ public class ConHjZp {
 		this.temp09 = temp09;
 	}
 
-	@Basic
-	@Column(name = "status")
 	public String getStatus() {
 		return status;
 	}
@@ -126,9 +101,6 @@ public class ConHjZp {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	@Basic
-	@Column(name = "ts")
 	public Timestamp getTs() {
 		return ts;
 	}
@@ -137,8 +109,6 @@ public class ConHjZp {
 		this.ts = ts;
 	}
 
-	@Basic
-	@Column(name = "extend1")
 	public String getExtend1() {
 		return extend1;
 	}
@@ -147,8 +117,6 @@ public class ConHjZp {
 		this.extend1 = extend1;
 	}
 
-	@Basic
-	@Column(name = "extend2")
 	public String getExtend2() {
 		return extend2;
 	}
@@ -157,8 +125,6 @@ public class ConHjZp {
 		this.extend2 = extend2;
 	}
 
-	@Basic
-	@Column(name = "extend3")
 	public String getExtend3() {
 		return extend3;
 	}
@@ -167,8 +133,6 @@ public class ConHjZp {
 		this.extend3 = extend3;
 	}
 
-	@Basic
-	@Column(name = "extend4")
 	public String getExtend4() {
 		return extend4;
 	}
@@ -177,8 +141,6 @@ public class ConHjZp {
 		this.extend4 = extend4;
 	}
 
-	@Basic
-	@Column(name = "extend5")
 	public String getExtend5() {
 		return extend5;
 	}
@@ -187,8 +149,6 @@ public class ConHjZp {
 		this.extend5 = extend5;
 	}
 
-	@Basic
-	@Column(name = "extend6")
 	public String getExtend6() {
 		return extend6;
 	}
@@ -197,8 +157,6 @@ public class ConHjZp {
 		this.extend6 = extend6;
 	}
 
-	@Basic
-	@Column(name = "extend7")
 	public String getExtend7() {
 		return extend7;
 	}
@@ -207,8 +165,6 @@ public class ConHjZp {
 		this.extend7 = extend7;
 	}
 
-	@Basic
-	@Column(name = "extend8")
 	public String getExtend8() {
 		return extend8;
 	}
@@ -217,8 +173,6 @@ public class ConHjZp {
 		this.extend8 = extend8;
 	}
 
-	@Basic
-	@Column(name = "extend9")
 	public String getExtend9() {
 		return extend9;
 	}
@@ -227,8 +181,6 @@ public class ConHjZp {
 		this.extend9 = extend9;
 	}
 
-	@Basic
-	@Column(name = "extend10")
 	public String getExtend10() {
 		return extend10;
 	}

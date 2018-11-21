@@ -111,8 +111,6 @@ public class Mobile {
 		logger.info("同步焊口 工艺规程接口 焊口：" + weld_code + " 工艺规程：" + pr_no);
 		QueryPro queryPro = new QueryPro();
 		queryPro.set_MSG_("这是熔断器");
-
-
 		return queryPro;
 	}
 

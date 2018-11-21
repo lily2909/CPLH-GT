@@ -1,9 +1,5 @@
 package com.cplh.gt.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -12,14 +8,10 @@ import java.util.Objects;
  */
 
 
-@Entity
-@Table(name = "PR_WELD_RELATION", schema = "public", catalog = "postgres")
 public class PrWeldRelation {
 	private String weldCode;
 	private String prNo;
 
-	@Basic
-	@Column(name = "weld_code")
 	public String getWeldCode() {
 		return weldCode;
 	}
@@ -28,8 +20,6 @@ public class PrWeldRelation {
 		this.weldCode = weldCode;
 	}
 
-	@Basic
-	@Column(name = "pr_no")
 	public String getPrNo() {
 		return prNo;
 	}

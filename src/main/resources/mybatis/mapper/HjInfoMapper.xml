@@ -5,7 +5,7 @@
 <mapper namespace="com.cplh.gt.dao.HjInfoDao">
 
 
-    <select id="queryPro" resultType="ConHjInfo">
+    <select id="queryPro" resultType="com.cplh.gt.bean.ConHjInfo">
         select *
         from (
                  select
@@ -21,11 +21,10 @@
         where rn = 1
     </select>
 
-    <select id="clickPro" resultType="ConHjInfo">
+    <select id="clickPro" resultType="com.cplh.gt.bean.ConHjInfo">
         select *
         from ${tableName}
         where weld_layer = #{weldLayer} and equip_code = #{equipCode}
-        order by ts desc
-        LIMIT 1
+        order by ts desc LIMIT 1
     </select>
 </mapper>

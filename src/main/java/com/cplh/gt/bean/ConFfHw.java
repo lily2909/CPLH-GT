@@ -1,9 +1,5 @@
 package com.cplh.gt.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -13,8 +9,6 @@ import java.util.Objects;
  */
 
 
-@Entity
-@Table(name = "CON_FF_HW", schema = "public", catalog = "postgres")
 public class ConFfHw {
 	private String weldCode;
 	private String equipCode;
@@ -45,8 +39,6 @@ public class ConFfHw {
 	private String extend9;
 	private String extend10;
 
-	@Basic
-	@Column(name = "weld_code")
 	public String getWeldCode() {
 		return weldCode;
 	}
@@ -55,8 +47,6 @@ public class ConFfHw {
 		this.weldCode = weldCode;
 	}
 
-	@Basic
-	@Column(name = "equip_code")
 	public String getEquipCode() {
 		return equipCode;
 	}
@@ -65,8 +55,6 @@ public class ConFfHw {
 		this.equipCode = equipCode;
 	}
 
-	@Basic
-	@Column(name = "equip_code_cdp")
 	public String getEquipCodeCdp() {
 		return equipCodeCdp;
 	}
@@ -75,8 +63,6 @@ public class ConFfHw {
 		this.equipCodeCdp = equipCodeCdp;
 	}
 
-	@Basic
-	@Column(name = "person_code")
 	public String getPersonCode() {
 		return personCode;
 	}
@@ -85,8 +71,6 @@ public class ConFfHw {
 		this.personCode = personCode;
 	}
 
-	@Basic
-	@Column(name = "temp_01_01")
 	public long getTemp0101() {
 		return temp0101;
 	}
@@ -95,8 +79,6 @@ public class ConFfHw {
 		this.temp0101 = temp0101;
 	}
 
-	@Basic
-	@Column(name = "temp_01_02")
 	public long getTemp0102() {
 		return temp0102;
 	}
@@ -105,8 +87,6 @@ public class ConFfHw {
 		this.temp0102 = temp0102;
 	}
 
-	@Basic
-	@Column(name = "temp_01_03")
 	public long getTemp0103() {
 		return temp0103;
 	}
@@ -115,8 +95,6 @@ public class ConFfHw {
 		this.temp0103 = temp0103;
 	}
 
-	@Basic
-	@Column(name = "temp_03_01")
 	public long getTemp0301() {
 		return temp0301;
 	}
@@ -125,8 +103,6 @@ public class ConFfHw {
 		this.temp0301 = temp0301;
 	}
 
-	@Basic
-	@Column(name = "temp_03_02")
 	public long getTemp0302() {
 		return temp0302;
 	}
@@ -135,8 +111,6 @@ public class ConFfHw {
 		this.temp0302 = temp0302;
 	}
 
-	@Basic
-	@Column(name = "temp_03_03")
 	public long getTemp0303() {
 		return temp0303;
 	}
@@ -145,8 +119,6 @@ public class ConFfHw {
 		this.temp0303 = temp0303;
 	}
 
-	@Basic
-	@Column(name = "temp_06_01")
 	public long getTemp0601() {
 		return temp0601;
 	}
@@ -155,8 +127,6 @@ public class ConFfHw {
 		this.temp0601 = temp0601;
 	}
 
-	@Basic
-	@Column(name = "temp_06_02")
 	public long getTemp0602() {
 		return temp0602;
 	}
@@ -165,8 +135,6 @@ public class ConFfHw {
 		this.temp0602 = temp0602;
 	}
 
-	@Basic
-	@Column(name = "temp_06_03")
 	public long getTemp0603() {
 		return temp0603;
 	}
@@ -175,8 +143,6 @@ public class ConFfHw {
 		this.temp0603 = temp0603;
 	}
 
-	@Basic
-	@Column(name = "temp_09_01")
 	public long getTemp0901() {
 		return temp0901;
 	}
@@ -185,8 +151,6 @@ public class ConFfHw {
 		this.temp0901 = temp0901;
 	}
 
-	@Basic
-	@Column(name = "temp_09_02")
 	public long getTemp0902() {
 		return temp0902;
 	}
@@ -195,8 +159,6 @@ public class ConFfHw {
 		this.temp0902 = temp0902;
 	}
 
-	@Basic
-	@Column(name = "temp_09_03")
 	public long getTemp0903() {
 		return temp0903;
 	}
@@ -205,8 +167,6 @@ public class ConFfHw {
 		this.temp0903 = temp0903;
 	}
 
-	@Basic
-	@Column(name = "status")
 	public String getStatus() {
 		return status;
 	}
@@ -215,8 +175,6 @@ public class ConFfHw {
 		this.status = status;
 	}
 
-	@Basic
-	@Column(name = "ts")
 	public Timestamp getTs() {
 		return ts;
 	}
@@ -225,8 +183,6 @@ public class ConFfHw {
 		this.ts = ts;
 	}
 
-	@Basic
-	@Column(name = "extend1")
 	public String getExtend1() {
 		return extend1;
 	}
@@ -235,8 +191,6 @@ public class ConFfHw {
 		this.extend1 = extend1;
 	}
 
-	@Basic
-	@Column(name = "extend2")
 	public String getExtend2() {
 		return extend2;
 	}
@@ -245,8 +199,6 @@ public class ConFfHw {
 		this.extend2 = extend2;
 	}
 
-	@Basic
-	@Column(name = "extend3")
 	public String getExtend3() {
 		return extend3;
 	}
@@ -255,8 +207,6 @@ public class ConFfHw {
 		this.extend3 = extend3;
 	}
 
-	@Basic
-	@Column(name = "extend4")
 	public String getExtend4() {
 		return extend4;
 	}
@@ -265,8 +215,6 @@ public class ConFfHw {
 		this.extend4 = extend4;
 	}
 
-	@Basic
-	@Column(name = "extend5")
 	public String getExtend5() {
 		return extend5;
 	}
@@ -275,8 +223,6 @@ public class ConFfHw {
 		this.extend5 = extend5;
 	}
 
-	@Basic
-	@Column(name = "extend6")
 	public String getExtend6() {
 		return extend6;
 	}
@@ -285,8 +231,6 @@ public class ConFfHw {
 		this.extend6 = extend6;
 	}
 
-	@Basic
-	@Column(name = "extend7")
 	public String getExtend7() {
 		return extend7;
 	}
@@ -295,8 +239,6 @@ public class ConFfHw {
 		this.extend7 = extend7;
 	}
 
-	@Basic
-	@Column(name = "extend8")
 	public String getExtend8() {
 		return extend8;
 	}
@@ -305,8 +247,6 @@ public class ConFfHw {
 		this.extend8 = extend8;
 	}
 
-	@Basic
-	@Column(name = "extend9")
 	public String getExtend9() {
 		return extend9;
 	}
@@ -315,8 +255,6 @@ public class ConFfHw {
 		this.extend9 = extend9;
 	}
 
-	@Basic
-	@Column(name = "extend10")
 	public String getExtend10() {
 		return extend10;
 	}
