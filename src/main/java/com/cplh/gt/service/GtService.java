@@ -7,17 +7,14 @@ package com.cplh.gt.service;
 
 import com.cplh.gt.bean.*;
 import com.cplh.gt.bean.Process;
-import com.cplh.gt.dao.HjInfoDao;
-import com.cplh.gt.dao.PrWeldReationDao;
+import com.cplh.gt.dao.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * 工况逻辑处理
@@ -28,7 +25,13 @@ public class GtService {
 	HjInfoDao hjInfoDao;
 
 	@Autowired
+	ConEquipReDao conEquipReDao;
+	@Autowired
 	PrWeldReationDao prWeldReationDao;
+	@Autowired
+	PrWeldLimitDao prWeldLimitDao;
+	@Autowired
+	HjZpDao hjZpDao;
 
 	Logger logger = LoggerFactory.getLogger(GtService.class);
 
@@ -64,7 +67,7 @@ public class GtService {
 		//检测返回数据
 		if (result == null || result.size() == 0) {
 			out.setSuccess(true);
-			out.set_MSG_("查询失败");
+			out.set_MSG_("查询成功 0条数据");
 			logger.info(out.toString());
 			return out;
 		}
@@ -170,7 +173,197 @@ public class GtService {
 
 
 	/**
-	 * 抽取验收方法
+	 * 验收实时数据方法
+	 *
+	 * @param weld_code
+	 * @return
+	 */
+	public YsInfo info(String weld_code) {
+		//返回一级对象
+		YsInfo out = new YsInfo();
+		//中频集合
+		ArrayList<YsDate> zpList = new ArrayList<>();
+		//焊接焊机集合
+		HashMap<String, Map<String, List<ConHjInfo>>> map = new HashMap<>();
+
+		//获取中频加热数据
+		List<ConHjZp> allByWeld = hjZpDao.getAllByWeld(weld_code);
+		//验收中频数据
+		YsDate upZp = ys(allByWeld, "temp00", "ZP", null, ConHjZp.class);
+		YsDate lowZp = ys(allByWeld, "temp06", "ZP", null, ConHjZp.class);
+		zpList.add(upZp);
+		zpList.add(lowZp);
+		out.setHeatList(zpList);
+
+
+		//获取焊接数据
+		List<ConHjInfo> infoList = hjInfoDao.getAllByWeld(weld_code);
+		if (infoList != null) {
+			//按焊机分组
+			Iterator<ConHjInfo> iterator = infoList.iterator();
+			while (iterator.hasNext()) {
+				ConHjInfo next = iterator.next();
+				Map<String, List<ConHjInfo>> hjMap = map.get(next.getEquipCode());   //根据焊机编号 将相关数据分类封装
+				if (hjMap != null) {
+					List<ConHjInfo> hqList = hjMap.get(next.getHqNum());            //根据焊枪数据 将数据分类封装
+					if (hqList != null)
+						hqList.add(next);
+					else {
+						hqList = new ArrayList<>();
+						hjMap.put(next.getHqNum(), hqList);
+					}
+				} else {
+					hjMap = new HashMap<>();
+					List<ConHjInfo> hqList = new ArrayList<>();
+					hjMap.put(next.getHqNum(), hqList);
+					map.put(next.getEquipCode(), hjMap);
+				}
+			}
+			ArrayList<YsHj> ysList = new ArrayList<>();
+			//验收焊接数据
+			int hj_inddex = 1;
+			int hq_index = 1;
+			int info_index = 1;
+			Set<Map.Entry<String, Map<String, List<ConHjInfo>>>> entries = map.entrySet(); //所有的焊接机组集合 键 为焊机
+			for (Map.Entry<String, Map<String, List<ConHjInfo>>> entry : entries) {
+				String key = entry.getKey();
+				Map<String, List<ConHjInfo>> value = entry.getValue();
+				Set<Map.Entry<String, List<ConHjInfo>>> entries1 = value.entrySet();
+				//根据焊机编号 获取当前工序 与规范值
+				ConEquipRelation rel = conEquipReDao.queryByEquip(key);
+				PrWeldLimit prWeldLimit = null;
+				String gx = "";
+				if (rel != null) {
+					gx = rel.getEquipType();
+					if (!gx.equals("GH"))
+						gx = gx.substring(0, gx.length() - 2);
+					//获取规范值
+					prWeldLimit = prWeldLimitDao.queryByweldCodePro(weld_code, gx);
+				}
+				//创建返回 焊机对象
+				YsHj ysHj = new YsHj();
+				ysHj.setSKILL_NAME(gx); //工序
+				ysHj.setM_NAME(key);    //焊机
+				ysHj.setM_index(hj_inddex); //排序
+				hj_inddex++;
+				ArrayList<YsHq> hjList = new ArrayList<>();
+				for (Map.Entry<String, List<ConHjInfo>> stringListEntry : entries1) {
+					String key1 = stringListEntry.getKey();
+					List<ConHjInfo> value1 = stringListEntry.getValue();
+					//创建焊枪对象
+					YsHq ysHq = new YsHq();
+					ysHq.setWeld_index(hq_index);
+					ysHq.setName(key);
+					ArrayList<YsDate> ysDates = new ArrayList<>();
+					YsDate hjSpeed = ys(value1, "speed", gx, prWeldLimit, ConHjInfo.class);
+					YsDate current = ys(value1, "current", gx, prWeldLimit, ConHjInfo.class);
+					YsDate voltage = ys(value1, "voltage", gx, prWeldLimit, ConHjInfo.class);
+					//封装数据
+					ysDates.add(hjSpeed);
+					ysDates.add(current);
+					ysDates.add(voltage);
+					hjList.add(ysHq);
+					hq_index++;
+				}
+				ysList.add(ysHj);
+			}
+			out.setWeldList(ysList);
+		}
+		out.set_time_(new Date());
+		out.set_msg_("同步成功");
+		return out;
+	}
+
+	/**
+	 * 验收方法
+	 *
+	 * @param paramList
+	 * @param name      验收字段名
+	 * @param limitName 验收工序名 如果 工序不为ZP且limit为空 则规范值为0 0
+	 * @param limit     规范值实体
+	 * @param <T>       具体验收类型
+	 * @return
+	 */
+	private <T extends ConHj> YsDate ys(List<T> paramList, String name, String limitName, PrWeldLimit limit, Class T) {
+		YsDate ysDate = new YsDate();
+		if (paramList != null) {
+			//将结合转换成对应泛型
+			List<T> paramList1 = (List<T>) paramList;
+			//初始化对象
+			//最大 做小值
+			Double max = 0d;
+			Double min = 0d;
+			//规范值
+			int lim_up = 150;
+			int lim_low = 0;
+			long CXstart = 0L;  // 超限开始时间
+			long CXend = 0L;    // 超限结束时间
+			long CXsum = 0L;    // 超限总时间
+			long sum = 0L;      // 工序总时间
+			//如果不是中频
+			if (!"ZP".equals(limitName)) {
+				if(  limit != null && "speed".equals(name)){
+					lim_up = limit.getSpeedUpperLimit();
+					lim_low = limit.getSpeedLowerLimit();
+
+				}else if(  limit != null && "current".equals(name)){
+					lim_up = limit.getCurrentUpperLimit();
+					lim_low = limit.getCurrentLowerLimit();
+
+				}else if(  limit != null && "voltage".equals(name)){
+					lim_up = limit.getVoltageUpperLimit();
+					lim_low = limit.getVoltageUpperLimit();
+
+				}else {
+					lim_up = 0;
+					lim_low = 0;
+				}
+			}
+			//验收数据
+			for (T t : paramList1) {
+				double value = t.getCurrent();
+				long time = t.getTs().getTime();
+				//更新最大最小值
+				if (max < value) max = value;
+				if (min > value) min = value;
+				//更新 主表超限数据字段 记录超限开始时间
+				if (value > lim_up) {
+					if (CXstart == 0) {
+						CXstart = time;
+					}
+				} else if (value < lim_low) {
+					if (CXstart == 0) {
+						CXstart = time;
+					}
+				} else {
+					//合格数据 设为超限结束时间 累加总时间
+					CXend = time;
+					if (CXstart != 0) {
+						CXsum += CXend - CXstart;
+						CXstart = 0;
+					}
+				}
+			}
+
+			//保留小数点后两位
+			double cXsum = CXsum;
+			double v = ((int) (cXsum / sum * 10000)) / 100.0;
+			v = 100 - v;
+			ysDate.setRate(v);
+			CXstart = 0;
+			CXend = 0;
+			CXsum = 0;
+			ysDate.setMax(max);
+			ysDate.setMax_r(lim_up);
+			ysDate.setMin(min);
+			ysDate.setMin_r(lim_low);
+			ysDate.setName(name);
+		}
+		return ysDate;
+	}
+
+	/**
+	 * 折线图封装数据方法
 	 *
 	 * @param pro
 	 * @return
@@ -300,9 +493,10 @@ public class GtService {
 		QueryPro out = new QueryPro();
 		out.setSuccess(true);
 		HashMap<String, Object> objectObjectHashMap = new HashMap<>();
-		objectObjectHashMap.put("count",insert);
+		objectObjectHashMap.put("count", insert);
 		out.setData(objectObjectHashMap);
 		out.set_MSG_("同步成功");
 		return out;
 	}
+
 }

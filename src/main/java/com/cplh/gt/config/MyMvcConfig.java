@@ -3,7 +3,7 @@ package com.cplh.gt.config;
 import com.cplh.gt.component.MyLocaleResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Author: liuhongli.
@@ -11,11 +11,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  */
 
 @Configuration
-public class MyMvcConfig extends WebMvcConfigurationSupport {
+public class MyMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public MyLocaleResolver localeResolver(){
 
 		return new MyLocaleResolver();
 	}
+
 }

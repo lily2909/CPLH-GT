@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 
 
-public class ConFfZp {
+public class ConFfZp  {
 	private String weldCode;
 	private String equipCode;
 	private String equipCodeCdp;

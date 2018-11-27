@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 
 
-public class ConHjZp {
+public class ConHjZp extends ConHj {
 	private String weldCode;
 	private String equipCode;
 	private String equipCodeCdp;

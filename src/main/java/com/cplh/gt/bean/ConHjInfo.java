@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 
 
-public class ConHjInfo {
+public class ConHjInfo extends ConHj {
 	private String tableName;
 	private String weldCode;
 	private String weldLayer;

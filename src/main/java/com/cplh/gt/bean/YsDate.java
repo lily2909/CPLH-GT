@@ -11,15 +11,15 @@ package com.cplh.gt.bean;
 public class YsDate {
 
 	//规范最大值
-	private Integer max;
+	private Double max;
 	//规范最小值
-	private Integer min;
+	private Double min;
 	//实际最大值
 	private Integer max_r;
 	//实际最小值
 	private Integer min_r;
 	//合格数据占比
-	private Float rate;
+	private Double rate;
 	//点位名 0点 6点  送丝速度 电流 电压
 	private String  name;
 	//序号
@@ -38,19 +38,19 @@ public class YsDate {
 				'}';
 	}
 
-	public Integer getMax() {
+	public Double getMax() {
 		return max;
 	}
 
-	public void setMax(Integer max) {
+	public void setMax(Double max) {
 		this.max = max;
 	}
 
-	public Integer getMin() {
+	public Double getMin() {
 		return min;
 	}
 
-	public void setMin(Integer min) {
+	public void setMin(Double min) {
 		this.min = min;
 	}
 
@@ -70,11 +70,11 @@ public class YsDate {
 		this.min_r = min_r;
 	}
 
-	public Float getRate() {
+	public Double getRate() {
 		return rate;
 	}
 
-	public void setRate(Float rate) {
+	public void setRate(Double rate) {
 		this.rate = rate;
 	}
 

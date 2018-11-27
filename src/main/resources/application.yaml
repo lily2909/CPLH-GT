@@ -1,5 +1,5 @@
 server:
-  port: 8080   # 设置访问端口
+  port: 8081   # 设置访问端口
   servlet:
       context-path: /   #设置访问根路径
   mvc:
@@ -24,8 +24,9 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  application:
+    name: hystrix-dashboard
 #    initialization-mode: always
-
 
   #    schema:
   #    - classpath:department.sql   #设置初始化脚本名称
@@ -40,8 +41,11 @@ spring:
     encoding: UTF-8
     servlet:
       content-type: text/html
-#    prefix: classpath:/templates
 
+#  resources:
+#    static-locations: classpath:/META-INF/resources/webjars/**
+#    add-mappings: false
+#    prefix: classpath:/templates
 mybatis:
 #  config-location:  classpath:mybatis/config.xml         #指定mybatis默认配置文件 不和configuration 同时使用
   mapper-locations: classpath:mybatis/mapper/*.xml      #设置设置mapper映射文件地址
@@ -49,12 +53,19 @@ mybatis:
   configuration:
    map-underscore-to-camel-case: true
    cache-enabled: false
+banner:
+  image:
+    location: classpath:banner.PNG
+    width: 60
+    height: 8
+    invert: false
+  charset: utf-8
+#  location: classpath:banner.txt
 #   log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
 
 
 
 ---
-
 spring:
   profiles: postgres        #设置为文档区设置名称
   datasource:

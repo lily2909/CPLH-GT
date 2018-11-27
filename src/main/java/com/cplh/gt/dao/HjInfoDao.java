@@ -2,7 +2,6 @@ package com.cplh.gt.dao;
 
 import com.cplh.gt.bean.ConHjInfo;
 import com.cplh.gt.bean.PrWeldLimit;
-import com.cplh.gt.bean.QueryPro;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -53,4 +52,10 @@ public interface HjInfoDao {
 	@Select("select * from PR_WELD_LIMIT where pr_no = (select pr_no from pw_weld_relation where weld_code = #{weldCode}) and apec_type = #{pro}")
 	public PrWeldLimit queryLimitByWeld(String weldCode,String pro);
 
+	/**
+	 * 获取所有数据
+	 * @return
+	 */
+	@Select("select * FROM  CON_HJ_INFO where weld_code = #{weld_code} ")
+	List<ConHjInfo> getAllByWeld(String weld_code);
 }

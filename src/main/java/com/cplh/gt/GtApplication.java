@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 
 @EnableCircuitBreaker
+//@EnableHystrixDashboard
 @SpringBootApplication
 @MapperScan("com.cplh.gt.dao")  //设置扫描mapper文件的路径
 public class GtApplication {
