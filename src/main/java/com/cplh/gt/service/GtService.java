@@ -26,12 +26,19 @@ public class GtService {
 
 	@Autowired
 	ConEquipReDao conEquipReDao;
+
 	@Autowired
 	PrWeldReationDao prWeldReationDao;
+
 	@Autowired
 	PrWeldLimitDao prWeldLimitDao;
+
 	@Autowired
 	HjZpDao hjZpDao;
+
+	static Map<String,ConEquipRelation> relationMap;
+
+
 
 	Logger logger = LoggerFactory.getLogger(GtService.class);
 
@@ -59,7 +66,7 @@ public class GtService {
 	 */
 	public QueryPro queryPro() {
 		QueryPro out = new QueryPro();
-		HashMap<String, Object> data = new HashMap<>();
+		HashMap<String, Process> data = new HashMap<>();
 		//创建查询对象 设置当前查询表名
 		ConHjInfo queryParam = new ConHjInfo();
 		queryParam.setTableName("con_hj_info");
@@ -77,7 +84,15 @@ public class GtService {
 		while (iterator.hasNext()) {
 			ConHjInfo next = iterator.next();
 			//查找是否出现过该工序数据
-			Process process = (Process) data.get(next.getWeldLayer());
+			if(relationMap == null)
+				getRelation();
+			ConEquipRelation conEquipRelation = relationMap.get(next.getEquipCode());
+			if(conEquipRelation == null) {
+				out.setSuccess(false);
+				out.set_MSG_("未在关系表中发现此焊机数据");
+				return out;
+			}
+			Process process =  data.get(conEquipRelation.getEquipType());
 			if (process == null) {
 				process = new Process();
 				process.setProcessName(next.getWeldLayer());
@@ -85,7 +100,7 @@ public class GtService {
 				ArrayList<String> equipCodes = new ArrayList<>();
 				equipCodes.add(next.getEquipCode());
 				process.setEquipCodes(equipCodes);
-				data.put(next.getWeldLayer(), process);
+				data.put(conEquipRelation.getEquipType(), process);
 
 			} else {
 				//更新已有工序数据的焊机列表
@@ -124,10 +139,14 @@ public class GtService {
 		ProcessInfo pro2 = new ProcessInfo();
 		ProcessInfo pro3 = null;
 		ProcessInfo pro4 = null;
+
+		if (!layer.equals("GH"))
+			layer = layer.substring(0, layer.length() - 2);
+
 		data.put("pro1", pro1);
 		data.put("pro2", pro2);
 		//如果是根焊 初始化三四焊枪备用
-		if (layer != null && layer.equals("NH")) {
+		if (layer != null && layer.equals("GH")) {
 			hq3 = new ArrayList<>();
 			hq4 = new ArrayList<>();
 			pro3 = new ProcessInfo();
@@ -230,7 +249,10 @@ public class GtService {
 				Map<String, List<ConHjInfo>> value = entry.getValue();
 				Set<Map.Entry<String, List<ConHjInfo>>> entries1 = value.entrySet();
 				//根据焊机编号 获取当前工序 与规范值
-				ConEquipRelation rel = conEquipReDao.queryByEquip(key);
+				if(relationMap == null)
+					getRelation();
+				ConEquipRelation rel = relationMap.get(key);
+				//ConEquipRelation rel = conEquipReDao.queryByEquip(key);
 				PrWeldLimit prWeldLimit = null;
 				String gx = "";
 				if (rel != null) {
@@ -497,6 +519,14 @@ public class GtService {
 		out.setData(objectObjectHashMap);
 		out.set_MSG_("同步成功");
 		return out;
+	}
+
+	private void getRelation(){
+		List<ConEquipRelation> relationList =  conEquipReDao.getAll();
+		relationMap = new HashMap<>();
+		for (ConEquipRelation conEquipRelation : relationList) {
+			relationMap.put(conEquipRelation.getEquipCodeZxj(),conEquipRelation);
+		}
 	}
 
 }

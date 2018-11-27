@@ -45,16 +45,13 @@ public class Mobile {
 	 *
 	 * @param jz
 	 */
-	@HystrixCommand(fallbackMethod = "Fail1", commandProperties = {
-			@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000")
-	})
+	//@HystrixCommand(fallbackMethod = "Fail1", commandProperties = {
+	//		@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000")
+	//})
 	@GetMapping("/queryPro")
 	@ResponseBody
 	public QueryPro queryPro() {
 		logger.info("查询所有工序");
-		//if (!StringUtils.isEmpty(jz)) {
-		//	//如果传递了机组
-		//}
 		QueryPro queryPro = gtService.queryPro();
 		return queryPro;
 	}
@@ -73,9 +70,6 @@ public class Mobile {
 	public QueryPro clickPro(@PathVariable String layer, @PathVariable String hj_code, @PathVariable String weldCode) {
 		logger.info("查询工序详细数据接口,当前查询为" + layer + " 工序的 " + hj_code + "焊机");
 		QueryPro queryPro = gtService.clickPro(layer, hj_code, weldCode);
-		if (!StringUtils.isEmpty(layer)) {
-			//如果传递了机组
-		}
 		return queryPro;
 	}
 

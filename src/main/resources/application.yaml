@@ -54,13 +54,13 @@ mybatis:
    map-underscore-to-camel-case: true
    cache-enabled: false
 banner:
-  image:
-    location: classpath:banner.PNG
-    width: 60
-    height: 8
-    invert: false
+#  image:
+##    location: classpath:banner.PNG
+#    width: 60
+#    height: 8
+#    invert: false
   charset: utf-8
-#  location: classpath:banner.txt
+  location: classpath:banner.txt
 #   log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
 
 

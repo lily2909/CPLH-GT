@@ -16,7 +16,7 @@ public class QueryPro {
 	//成功状态
 	private boolean Success;
 	//具体数据
-	private Map<String,Object> Data;
+	private Map<String, ?extends Object> Data;
 	private String _MSG_;
 
 	@Override
@@ -36,11 +36,11 @@ public class QueryPro {
 		Success = success;
 	}
 
-	public Map<String, Object> getData() {
+	public Map<String, ? extends Object> getData() {
 		return Data;
 	}
 
-	public void setData(Map<String, Object> data) {
+	public void setData(Map<String, ? extends Object> data) {
 		Data = data;
 	}
 
