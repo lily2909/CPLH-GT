@@ -1,7 +1,8 @@
 package com.cplh.gt.controller;
 
-import com.alibaba.druid.util.StringUtils;
+import com.alibaba.fastjson.JSONObject;
 import com.cplh.gt.bean.QueryPro;
+import com.cplh.gt.bean.Test123;
 import com.cplh.gt.bean.YsInfo;
 import com.cplh.gt.service.GtService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -30,10 +31,11 @@ public class Mobile {
 		return "/main";
 	}
 
-	@RequestMapping({"/main"})
-	public String indexAaa() {
-		System.out.println("main function");
-		return "login";
+	@RequestMapping(value={"/main"},produces = "application/json;charset=UTF-8")
+	public String indexAaa( @RequestBody Test123 we) {
+		//System.out.println(a);
+		System.out.println(we);
+		return we.toString();
 
 	}
 

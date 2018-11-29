@@ -24,4 +24,7 @@ public interface PrWeldReationDao {
 
 	@Select("select * from PR_WELD_RELATION")
 	public List<PrWeldRelation> getAll();
+
+	@Select("select count(1) from PR_WELD_RELATION where weld_code = #{weld_code}")
+	Integer checkByWeld(String weld_code);
 }

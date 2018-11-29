@@ -511,10 +511,17 @@ public class GtService {
 	 * @return
 	 */
 	public QueryPro sysWeldPro(String weld_code, String pr_no) {
-		Integer insert = prWeldReationDao.insert(weld_code, pr_no);
 		QueryPro out = new QueryPro();
-		out.setSuccess(true);
 		HashMap<String, Object> objectObjectHashMap = new HashMap<>();
+		Integer flag = prWeldReationDao.checkByWeld(weld_code);
+		if(flag >= 0){
+			out.setSuccess(false);
+			out.setData(objectObjectHashMap);
+			out.set_MSG_("该数据已存在");
+			return out;
+		}
+		Integer insert = prWeldReationDao.insert(weld_code, pr_no);
+		out.setSuccess(true);
 		objectObjectHashMap.put("count", insert);
 		out.setData(objectObjectHashMap);
 		out.set_MSG_("同步成功");
