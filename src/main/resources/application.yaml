@@ -1,12 +1,21 @@
 server:
-  port: 8081   # 设置访问端口
+  port: 80   # 设置访问端口
   servlet:
       context-path: /   #设置访问根路径
   mvc:
       date-format: yyyy-MM-dd hh:mm:ss    #设置时间转换格式
 spring:
   profiles:
-    active: postgres      #设置启动哪一个配置
+    active: postgres_test      #设置启动哪一个配置
+#    active: postgres_dev      #设置启动哪一个配置
+  jpa:
+   hibernate:
+    ddl-auto: update
+    dialect: org.hibernate.dialect.PostgreSQL9Dialect
+   properties:
+     hibernate:
+       temp:
+         use_jdbc_metadata_defaults: false
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    #设置连接池
     initialSize: 5
@@ -67,11 +76,31 @@ banner:
 
 ---
 spring:
-  profiles: postgres        #设置为文档区设置名称
+  profiles: postgres_dev        #设置为文档区设置名称
   datasource:
     username: postgres      #设置数据库连接用户名
-    password: root          #设置密码
-    url: jdbc:postgresql://127.0.0.1:5432/postgres?useSSL=false    #设置访问地址
+    password: admin          #设置密码
+    url: jdbc:postgresql://192.168.100.104:5432/testdb?useSSL=false    #设置访问地址
+    driver-class-name: org.postgresql.Driver #设置连接驱动
+#    tomcat:
+#      validation-query-timeout: 10
+---
+spring:
+  profiles: postgres_test       #设置为文档区设置名称
+  datasource:
+    username: postgres      #设置数据库连接用户名
+    password: admin          #设置密码
+    url: jdbc:postgresql://127.0.0.1:5432/testdb?useSSL=false    #设置访问地址
+    driver-class-name: org.postgresql.Driver #设置连接驱动
+#    tomcat:
+#      validation-query-timeout: 10
+---
+spring:
+  profiles: postgres_vm       #设置为文档区设置名称
+  datasource:
+    username: postgres      #设置数据库连接用户名
+    password: admin          #设置密码
+    url: jdbc:postgresql://192.168.145.128:5432/xyhdb2?useSSL=false    #设置访问地址
     driver-class-name: org.postgresql.Driver #设置连接驱动
 #    tomcat:
 #      validation-query-timeout: 10

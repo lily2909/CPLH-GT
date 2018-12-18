@@ -2,6 +2,7 @@ package com.cplh.gt.dao;
 
 import com.cplh.gt.bean.ConHjInfo;
 import com.cplh.gt.bean.PrWeldLimit;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -41,16 +42,18 @@ public interface HjInfoDao {
 	 *根据焊口获取所有数据
 	 * @param tableName
 	 * @param weldCode
+	 * @param hjCode
 	 * @return
 	 */
 	@Select("select * from ${tableName} where weld_code = #{weldCode} and equip_Code = #{hjCode}")
-	public List<ConHjInfo> queryAllByWeld(String tableName,String weldCode,String hjCode);
+	//@Select("select * from con_hj_info where weld_code = #{weldCode} and equip_Code = #{hjCode}")
+	public List<ConHjInfo> queryAllByWeld(@Param("tableName") String tableName,@Param("weldCode")  String weldCode,@Param("hjCode")  String hjCode);
 
 	/**
 	 * 根据焊口 获取规范值
 	 */
-	@Select("select * from PR_WELD_LIMIT where pr_no = (select pr_no from pw_weld_relation where weld_code = #{weldCode}) and apec_type = #{pro}")
-	public PrWeldLimit queryLimitByWeld(String weldCode,String pro);
+	@Select("select * from PR_WELD_LIMIT where pr_no = (select pr_no from pr_weld_relation where weld_code = #{weldCode}) and spec_type = #{pro}")
+	public PrWeldLimit queryLimitByWeld(@Param("weldCode") String weldCode,@Param("pro") String pro);
 
 	/**
 	 * 获取所有数据

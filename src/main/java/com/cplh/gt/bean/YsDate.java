@@ -15,9 +15,9 @@ public class YsDate {
 	//规范最小值
 	private Double min;
 	//实际最大值
-	private Integer max_r;
+	private Double max_r;
 	//实际最小值
-	private Integer min_r;
+	private Double min_r;
 	//合格数据占比
 	private Double rate;
 	//点位名 0点 6点  送丝速度 电流 电压
@@ -54,19 +54,19 @@ public class YsDate {
 		this.min = min;
 	}
 
-	public Integer getMax_r() {
+	public Double getMax_r() {
 		return max_r;
 	}
 
-	public void setMax_r(Integer max_r) {
+	public void setMax_r(Double max_r) {
 		this.max_r = max_r;
 	}
 
-	public Integer getMin_r() {
+	public Double getMin_r() {
 		return min_r;
 	}
 
-	public void setMin_r(Integer min_r) {
+	public void setMin_r(Double min_r) {
 		this.min_r = min_r;
 	}
 

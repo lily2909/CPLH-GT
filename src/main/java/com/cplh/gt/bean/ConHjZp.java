@@ -1,7 +1,6 @@
 package com.cplh.gt.bean;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 /**
  * Author: liuhongli.
@@ -14,10 +13,10 @@ public class ConHjZp extends ConHj {
 	private String equipCode;
 	private String equipCodeCdp;
 	private String personCode;
-	private String temp00;
-	private String temp03;
-	private String temp06;
-	private String temp09;
+	private Double temp00;
+	private Double temp03;
+	private Double temp06;
+	private Double temp09;
 	private String status;
 	private Timestamp ts;
 	private String extend1;
@@ -30,6 +29,32 @@ public class ConHjZp extends ConHj {
 	private String extend8;
 	private String extend9;
 	private String extend10;
+
+	@Override
+	public String toString() {
+		return "ConHjZp{" +
+				"weldCode='" + weldCode + '\'' +
+				", equipCode='" + equipCode + '\'' +
+				", equipCodeCdp='" + equipCodeCdp + '\'' +
+				", personCode='" + personCode + '\'' +
+				", temp00=" + temp00 +
+				", temp03=" + temp03 +
+				", temp06=" + temp06 +
+				", temp09=" + temp09 +
+				", status='" + status + '\'' +
+				", ts=" + ts +
+				", extend1='" + extend1 + '\'' +
+				", extend2='" + extend2 + '\'' +
+				", extend3='" + extend3 + '\'' +
+				", extend4='" + extend4 + '\'' +
+				", extend5='" + extend5 + '\'' +
+				", extend6='" + extend6 + '\'' +
+				", extend7='" + extend7 + '\'' +
+				", extend8='" + extend8 + '\'' +
+				", extend9='" + extend9 + '\'' +
+				", extend10='" + extend10 + '\'' +
+				'}';
+	}
 
 	public String getWeldCode() {
 		return weldCode;
@@ -63,34 +88,39 @@ public class ConHjZp extends ConHj {
 		this.personCode = personCode;
 	}
 
-	public String getTemp00() {
+	@Override
+	public Double getTemp00() {
 		return temp00;
 	}
 
-	public void setTemp00(String temp00) {
+	@Override
+	public void setTemp00(Double temp00) {
 		this.temp00 = temp00;
 	}
 
-	public String getTemp03() {
+	public Double getTemp03() {
 		return temp03;
 	}
 
-	public void setTemp03(String temp03) {
+	public void setTemp03(Double temp03) {
 		this.temp03 = temp03;
 	}
 
-	public String getTemp06() {
+	@Override
+	public Double getTemp06() {
 		return temp06;
 	}
 
-	public void setTemp06(String temp06) {
+	@Override
+	public void setTemp06(Double temp06) {
 		this.temp06 = temp06;
 	}
-	public String getTemp09() {
+
+	public Double getTemp09() {
 		return temp09;
 	}
 
-	public void setTemp09(String temp09) {
+	public void setTemp09(Double temp09) {
 		this.temp09 = temp09;
 	}
 
@@ -101,10 +131,13 @@ public class ConHjZp extends ConHj {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	@Override
 	public Timestamp getTs() {
 		return ts;
 	}
 
+	@Override
 	public void setTs(Timestamp ts) {
 		this.ts = ts;
 	}
@@ -187,38 +220,5 @@ public class ConHjZp extends ConHj {
 
 	public void setExtend10(String extend10) {
 		this.extend10 = extend10;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		ConHjZp conHjZp = (ConHjZp) o;
-		return Objects.equals(weldCode, conHjZp.weldCode) &&
-				Objects.equals(equipCode, conHjZp.equipCode) &&
-				Objects.equals(equipCodeCdp, conHjZp.equipCodeCdp) &&
-				Objects.equals(personCode, conHjZp.personCode) &&
-				Objects.equals(temp00, conHjZp.temp00) &&
-				Objects.equals(temp03, conHjZp.temp03) &&
-				Objects.equals(temp06, conHjZp.temp06) &&
-				Objects.equals(temp09, conHjZp.temp09) &&
-				Objects.equals(status, conHjZp.status) &&
-				Objects.equals(ts, conHjZp.ts) &&
-				Objects.equals(extend1, conHjZp.extend1) &&
-				Objects.equals(extend2, conHjZp.extend2) &&
-				Objects.equals(extend3, conHjZp.extend3) &&
-				Objects.equals(extend4, conHjZp.extend4) &&
-				Objects.equals(extend5, conHjZp.extend5) &&
-				Objects.equals(extend6, conHjZp.extend6) &&
-				Objects.equals(extend7, conHjZp.extend7) &&
-				Objects.equals(extend8, conHjZp.extend8) &&
-				Objects.equals(extend9, conHjZp.extend9) &&
-				Objects.equals(extend10, conHjZp.extend10);
-	}
-
-	@Override
-	public int hashCode() {
-
-		return Objects.hash(weldCode, equipCode, equipCodeCdp, personCode, temp00, temp03, temp06, temp09, status, ts, extend1, extend2, extend3, extend4, extend5, extend6, extend7, extend8, extend9, extend10);
 	}
 }

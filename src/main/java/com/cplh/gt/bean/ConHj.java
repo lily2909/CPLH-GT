@@ -11,8 +11,8 @@ import java.sql.Timestamp;
  * 焊接对象通用实体
  */
 public class ConHj {
-	private String temp00;
-	private String temp06;
+	private Double temp00;
+	private Double temp06;
 	private Timestamp ts;
 	private Long current;
 	private Long voltage;
@@ -30,19 +30,19 @@ public class ConHj {
 				'}';
 	}
 
-	public String getTemp00() {
+	public Double getTemp00() {
 		return temp00;
 	}
 
-	public void setTemp00(String temp00) {
+	public void setTemp00(Double temp00) {
 		this.temp00 = temp00;
 	}
 
-	public String getTemp06() {
+	public Double getTemp06() {
 		return temp06;
 	}
 
-	public void setTemp06(String temp06) {
+	public void setTemp06(Double temp06) {
 		this.temp06 = temp06;
 	}
 

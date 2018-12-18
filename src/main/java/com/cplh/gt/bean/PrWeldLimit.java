@@ -15,10 +15,10 @@ public class PrWeldLimit {
 	private Integer voltageLowerLimit;
 	private Integer speedUpperLimit;
 	private Integer speedLowerLimit;
-	private Integer speedUnit;
+	private String speedUnit;
 	private Integer gasFlowUpperLimit;
 	private Integer gasFlowLowerLimit;
-	private Integer gasFlowUnit;
+	private String gasFlowUnit;
 	private Integer weldSpeedUpperLimit;
 	private Integer weldSpeedLowerLimit;
 	private String weldSpeedUnit;
@@ -114,11 +114,11 @@ public class PrWeldLimit {
 		this.speedLowerLimit = speedLowerLimit;
 	}
 
-	public Integer getSpeedUnit() {
+	public String getSpeedUnit() {
 		return speedUnit;
 	}
 
-	public void setSpeedUnit(Integer speedUnit) {
+	public void setSpeedUnit(String speedUnit) {
 		this.speedUnit = speedUnit;
 	}
 
@@ -138,11 +138,11 @@ public class PrWeldLimit {
 		this.gasFlowLowerLimit = gasFlowLowerLimit;
 	}
 
-	public Integer getGasFlowUnit() {
+	public String getGasFlowUnit() {
 		return gasFlowUnit;
 	}
 
-	public void setGasFlowUnit(Integer gasFlowUnit) {
+	public void setGasFlowUnit(String gasFlowUnit) {
 		this.gasFlowUnit = gasFlowUnit;
 	}
 

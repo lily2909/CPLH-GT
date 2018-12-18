@@ -17,12 +17,21 @@ public class ProcessInfo {
 	//送丝速度
 	private Long speed;
 	private Double speedScale;
+	private Double speedMax;
+	private Double speedMin;
 	//电压
 	private Long voltage;
 	private Double voltageScale;
+	private Double voltageMax;
+	private Double voltageMin;
 	//电流
 	private Long current;
 	private Double currentScale;
+	private Double currentMax;
+	private Double currentMin;
+
+
+
 
 	@Override
 	public String toString() {
@@ -70,6 +79,22 @@ public class ProcessInfo {
 		this.speedScale = speedScale;
 	}
 
+	public Double getSpeedMax() {
+		return speedMax;
+	}
+
+	public void setSpeedMax(Double speedMax) {
+		this.speedMax = speedMax;
+	}
+
+	public Double getSpeedMin() {
+		return speedMin;
+	}
+
+	public void setSpeedMin(Double speedMin) {
+		this.speedMin = speedMin;
+	}
+
 	public Long getVoltage() {
 		return voltage;
 	}
@@ -86,6 +111,22 @@ public class ProcessInfo {
 		this.voltageScale = voltageScale;
 	}
 
+	public Double getVoltageMax() {
+		return voltageMax;
+	}
+
+	public void setVoltageMax(Double voltageMax) {
+		this.voltageMax = voltageMax;
+	}
+
+	public Double getVoltageMin() {
+		return voltageMin;
+	}
+
+	public void setVoltageMin(Double voltageMin) {
+		this.voltageMin = voltageMin;
+	}
+
 	public Long getCurrent() {
 		return current;
 	}
@@ -100,5 +141,21 @@ public class ProcessInfo {
 
 	public void setCurrentScale(Double currentScale) {
 		this.currentScale = currentScale;
+	}
+
+	public Double getCurrentMax() {
+		return currentMax;
+	}
+
+	public void setCurrentMax(Double currentMax) {
+		this.currentMax = currentMax;
+	}
+
+	public Double getCurrentMin() {
+		return currentMin;
+	}
+
+	public void setCurrentMin(Double currentMin) {
+		this.currentMin = currentMin;
 	}
 }
