@@ -4,10 +4,11 @@ server:
       context-path: /   #设置访问根路径
   mvc:
       date-format: yyyy-MM-dd hh:mm:ss    #设置时间转换格式
+
 spring:
   profiles:
-    active: postgres_test      #设置启动哪一个配置
-#    active: postgres_dev      #设置启动哪一个配置
+#    active: postgres_test      #设置启动哪一个配置
+    active: postgres_dev      #设置启动哪一个配置
   jpa:
    hibernate:
     ddl-auto: update
@@ -48,8 +49,13 @@ spring:
     cache: false
     mode: HTML5
     encoding: UTF-8
-    servlet:
-      content-type: text/html
+  redis:
+   database: 0
+   cluster:
+    nodes: 192.168.7.243:6379,192.168.7.243:6380
+  output:
+    ansi:
+      enabled: always
 
 #  resources:
 #    static-locations: classpath:/META-INF/resources/webjars/**

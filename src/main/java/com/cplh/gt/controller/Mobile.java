@@ -5,8 +5,6 @@ import com.cplh.gt.bean.QueryPro;
 import com.cplh.gt.bean.Test123;
 import com.cplh.gt.bean.YsInfo;
 import com.cplh.gt.service.GtService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +29,7 @@ public class Mobile {
 	GtService gtService;
 	@Autowired
 	ShowPerson showPerson;
-
+	
 
 	@ApiOperation(value = "默认调用接口", notes = "测试发布状态")
 	@ApiResponses({
@@ -101,8 +99,13 @@ public class Mobile {
 	@PostMapping("/clickPro/{weldCode}/{hjCode}/{layer}")
 	@ResponseBody
 	public QueryPro clickPro(@PathVariable("layer") String layer, @PathVariable("hjCode") String hjCode, @PathVariable("weldCode") String weldCode) {
+		long l = System.currentTimeMillis();
+
 		logger.info("查询工序详细数据接口,当前查询为" + layer + " 工序的 " + hjCode + "焊机" + weldCode + "焊口");
 		QueryPro queryPro = gtService.clickPro(layer, hjCode, weldCode);
+		long l2= System.currentTimeMillis();
+		long l1 = l2 - l;
+		queryPro.set_MSG_(String.valueOf(l1));
 		return queryPro;
 	}
 
@@ -121,9 +124,12 @@ public class Mobile {
 	@PostMapping("/info/{weldCode}")
 	@ResponseBody
 	public YsInfo info(@PathVariable("weldCode") String weldCode) {
-
+		long l = System.currentTimeMillis();
 		logger.info("查询验收详细数据接口,当前查询焊口为" + weldCode);
 		YsInfo queryPro = gtService.info(weldCode);
+		long l2= System.currentTimeMillis();
+		long l1 = l2 - l;
+		queryPro.set_msg_(String.valueOf(l1));
 		return queryPro;
 	}
 
