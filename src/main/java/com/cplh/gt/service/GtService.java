@@ -575,10 +575,10 @@ public class GtService {
 	}
 
 	@Cacheable("test")
-	public Test getTest(Integer id) {
+	public String getTest(Integer id) {
 		ValueOperations<String, String> stringStringValueOperations = ss.opsForValue();
-		Test testById = testDao.getTestById(id);
-		stringStringValueOperations.set(id.toString(),testById.toString());
-		return testById;
+		System.out.println("这个方法被调用了");
+
+		return id+"123";
 	}
 }

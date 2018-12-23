@@ -1,6 +1,5 @@
 package com.cplh.gt.controller;
 
-import com.cplh.autoconfig.ShowPerson;
 import com.cplh.gt.bean.QueryPro;
 import com.cplh.gt.bean.Test;
 import com.cplh.gt.bean.YsInfo;
@@ -27,9 +26,7 @@ public class Mobile {
 	Logger logger = LoggerFactory.getLogger(Mobile.class);
 	@Autowired
 	GtService gtService;
-	@Autowired
-	ShowPerson showPerson;
-	
+
 
 	@ApiOperation(value = "默认调用接口", notes = "测试发布状态")
 	@ApiResponses({
@@ -39,16 +36,15 @@ public class Mobile {
 	})
 	@PostMapping({"/index.html", "/", "/index"})
 	@ResponseBody
-	public String index(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println(showPerson.showName("123"));
+	public String index() {
 		return "连接成功";
 	}
 
 	@ApiOperation(value = "测试缓存接口", notes = "缓存查询数据")
 	@GetMapping(value = {"/main"})
 	@ResponseBody
-	public Test indexAaa(Integer id) {
-		Test a = gtService.getTest(id);
+	public String indexAaa(Integer id) {
+		String a = gtService.getTest(id);
 		System.out.println();
 		return a;
 
