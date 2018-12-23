@@ -11,9 +11,11 @@ import com.cplh.gt.dao.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -23,6 +25,8 @@ import java.util.*;
 public class GtService {
 	@Autowired
 	HjInfoDao hjInfoDao;
+	@Autowired
+	TestDao testDao;
 
 	@Autowired
 	ConEquipReDao conEquipReDao;
@@ -35,6 +39,8 @@ public class GtService {
 
 	@Autowired
 	HjZpDao hjZpDao;
+	@Autowired
+	StringRedisTemplate ss;
 
 	static Map<String, ConEquipRelation> relationMap;
 
@@ -568,4 +574,11 @@ public class GtService {
 		}
 	}
 
+	@Cacheable("test")
+	public Test getTest(Integer id) {
+		ValueOperations<String, String> stringStringValueOperations = ss.opsForValue();
+		Test testById = testDao.getTestById(id);
+		stringStringValueOperations.set(id.toString(),testById.toString());
+		return testById;
+	}
 }

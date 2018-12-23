@@ -4,7 +4,6 @@ server:
       context-path: /   #设置访问根路径
   mvc:
       date-format: yyyy-MM-dd hh:mm:ss    #设置时间转换格式
-
 spring:
   profiles:
 #    active: postgres_test      #设置启动哪一个配置
@@ -51,8 +50,9 @@ spring:
     encoding: UTF-8
   redis:
    database: 0
-   cluster:
-    nodes: 192.168.7.243:6379,192.168.7.243:6380
+   host: 192.168.7.243
+   port: 6379
+
   output:
     ansi:
       enabled: always
@@ -76,6 +76,7 @@ banner:
 #    invert: false
   charset: utf-8
   location: classpath:banner.txt
+debug: true
 #   log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
 
 

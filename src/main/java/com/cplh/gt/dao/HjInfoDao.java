@@ -19,7 +19,7 @@ public interface HjInfoDao {
 	 * 获取所有数据
 	 * @return
 	 */
-	@Select("select * FROM  CON_HJ_INFO  ")
+	@Select("select * FROM  CON_HJ_INFO")
 	public List<ConHjInfo> getAll();
 
 	/**

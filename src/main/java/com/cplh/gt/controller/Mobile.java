@@ -2,7 +2,7 @@ package com.cplh.gt.controller;
 
 import com.cplh.autoconfig.ShowPerson;
 import com.cplh.gt.bean.QueryPro;
-import com.cplh.gt.bean.Test123;
+import com.cplh.gt.bean.Test;
 import com.cplh.gt.bean.YsInfo;
 import com.cplh.gt.service.GtService;
 import io.swagger.annotations.*;
@@ -44,14 +44,13 @@ public class Mobile {
 		return "连接成功";
 	}
 
-	@ApiIgnore
-	@PostMapping(value = {"/main"}, produces = "application/json;charset=UTF-8")
-	public String indexAaa(@RequestBody List<Test123> we) {
-		//System.out.println(a);
-		for (Test123 test123 : we) {
-			System.out.println(test123.toString());
-		}
-		return we.toString();
+	@ApiOperation(value = "测试缓存接口", notes = "缓存查询数据")
+	@GetMapping(value = {"/main"})
+	@ResponseBody
+	public Test indexAaa(Integer id) {
+		Test a = gtService.getTest(id);
+		System.out.println();
+		return a;
 
 	}
 
