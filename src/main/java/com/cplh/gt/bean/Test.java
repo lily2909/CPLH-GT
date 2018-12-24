@@ -9,31 +9,30 @@ import java.io.Serializable;
 
 
 public class Test implements Serializable {
-	private  String Name;
-	private  String ID;
-
+	private  String name;
+	private  String id;
 
 	@Override
 	public String toString() {
 		return "Test{" +
-				"Name='" + Name + '\'' +
-				", ID='" + ID + '\'' +
+				"name='" + name + '\'' +
+				", id='" + id + '\'' +
 				'}';
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
-	public String getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String ID) {
-		this.ID = ID;
+	public void setId(String id) {
+		this.id = id;
 	}
 }

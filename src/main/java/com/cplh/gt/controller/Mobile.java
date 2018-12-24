@@ -40,11 +40,18 @@ public class Mobile {
 		return "连接成功";
 	}
 
+
+
+
+
 	@ApiOperation(value = "测试缓存接口", notes = "缓存查询数据")
-	@GetMapping(value = {"/main"})
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "path")
+	})
+	@GetMapping(value = {"/main/{id}"})
 	@ResponseBody
-	public String indexAaa(Integer id) {
-		String a = gtService.getTest(id);
+	public Test indexAaa(@PathVariable Integer id) {
+		Test a = gtService.getTest(id);
 		System.out.println();
 		return a;
 
