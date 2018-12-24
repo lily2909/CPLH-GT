@@ -46,7 +46,7 @@ public class Mobile {
 
 	@ApiOperation(value = "测试缓存接口", notes = "缓存查询数据")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "path")
+			@ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "int", paramType = "path")
 	})
 	@GetMapping(value = {"/main/{id}"})
 	@ResponseBody

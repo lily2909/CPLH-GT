@@ -1,5 +1,5 @@
 server:
-  port: 80   # 设置访问端口
+  port: 8082   # 设置访问端口
   servlet:
       context-path: /   #设置访问根路径
   mvc:

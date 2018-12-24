@@ -3,7 +3,6 @@ package com.cplh.gt.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -17,7 +16,6 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 
 @Configuration
-@ConfigurationProperties(prefix = "spring.cache.redis")
 public class MyRedisCacheManager {
 	@Bean
 	public RedisTemplate<Object,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
@@ -32,8 +30,8 @@ public class MyRedisCacheManager {
 		jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
 
 		// 设置value的序列化规则和 key的序列化规则
-		redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
-		redisTemplate.setKeySerializer(jackson2JsonRedisSerializer);
+		redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);  //设置值序列化器
+		redisTemplate.setKeySerializer(jackson2JsonRedisSerializer);    //设置键序列化器
 		redisTemplate.afterPropertiesSet();
 		return redisTemplate;
 	}
