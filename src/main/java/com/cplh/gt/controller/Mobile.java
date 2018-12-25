@@ -7,13 +7,10 @@ import com.cplh.gt.service.GtService;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * Author: liuhongli.
@@ -26,7 +23,8 @@ public class Mobile {
 	Logger logger = LoggerFactory.getLogger(Mobile.class);
 	@Autowired
 	GtService gtService;
-
+	@Autowired
+	RabbitTemplate rabbitTemplate;
 
 	@ApiOperation(value = "默认调用接口", notes = "测试发布状态")
 	@ApiResponses({
@@ -51,7 +49,9 @@ public class Mobile {
 	@GetMapping(value = {"/main/{id}"})
 	@ResponseBody
 	public Test indexAaa(@PathVariable Integer id) {
+
 		Test a = gtService.getTest(id);
+		rabbitTemplate.convertAndSend("test.fanout","123",a);
 		System.out.println();
 		return a;
 

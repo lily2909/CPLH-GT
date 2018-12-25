@@ -57,6 +57,11 @@ spring:
   output:
     ansi:
       enabled: always
+  rabbitmq:
+      host: 192.168.7.243
+      port: 5672
+      username: guest
+      password: guest
 
 #  resources:
 #    static-locations: classpath:/META-INF/resources/webjars/**
