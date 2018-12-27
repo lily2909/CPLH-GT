@@ -12,6 +12,11 @@ public class Test implements Serializable {
 	private  String name;
 	private  String id;
 
+	public Test(String name, String id) {
+		this.name = name;
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Test{" +

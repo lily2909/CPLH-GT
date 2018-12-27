@@ -62,6 +62,12 @@ spring:
       port: 5672
       username: guest
       password: guest
+  mail:
+    host: smtp.qq.com
+    username: 290965350@qq.com
+    password: lhygndwlvkugupbiej
+    properties:
+     mail.stmp.ssl.enable: true
 
 #  resources:
 #    static-locations: classpath:/META-INF/resources/webjars/**

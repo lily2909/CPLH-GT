@@ -7,6 +7,7 @@ import com.cplh.gt.service.GtService;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,18 @@ public class Mobile {
 
 	}
 
+	@RabbitListener(queues = "test1")
+	public void receive1(Test a){
+		System.out.println("1收到信息了");
+		System.out.println(a);
+
+	}
+	@RabbitListener(queues = "test1")
+	public void receive2(Test a){
+		System.out.println("2收到信息了");
+		System.out.println(a);
+
+	}
 
 	/**
 	 * 查询所有工作中工序的接口
