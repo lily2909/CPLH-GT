@@ -12,10 +12,13 @@ import java.util.List;
  * Date: 2018/11/13
  */
 
-
+/**
+ * mybatis dao
+ */
 public interface HjInfoDao {
 
 	/**
+	 * select语句
 	 * 获取所有数据
 	 * @return
 	 */
@@ -23,6 +26,7 @@ public interface HjInfoDao {
 	public List<ConHjInfo> getAll();
 
 	/**
+	 * sql语句在mapper中  ${传输 sql 字段}  #{传输 值 默认添加’‘}
 	 * 查询当前在工作工序
 	 * @param conHjInfo
 	 * @return

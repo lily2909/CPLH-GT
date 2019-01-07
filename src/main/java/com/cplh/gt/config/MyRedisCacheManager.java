@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 /**
+ * redis 配置类
  * Author: liuhongli.
  * Date: 2018/12/23
  */
@@ -17,9 +18,16 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 @Configuration
 public class MyRedisCacheManager {
+
+	/**
+	 * 设置redis保存对象时的序列化gun则为jackson提供的序列化规则
+	 * @param redisConnectionFactory
+	 * @return
+	 */
 	@Bean
 	public RedisTemplate<Object,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
 		RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+
 		redisTemplate.setConnectionFactory(redisConnectionFactory);
 		Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
 

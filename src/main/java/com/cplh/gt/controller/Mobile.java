@@ -10,15 +10,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
+ * 控制器
  * Author: liuhongli.
  * Date: 2018/11/5
  */
-
+//swagger api 标明这个方法需要生成文档
 @Api(value = "现场验收 展示调用controller",description = "现场验收 展示调用controller",hidden = true)
+//标明这是个controller 并且返回的都是json数据
 @RestController
 public class Mobile {
 	Logger logger = LoggerFactory.getLogger(Mobile.class);
@@ -27,12 +30,15 @@ public class Mobile {
 	@Autowired
 	RabbitTemplate rabbitTemplate;
 
+	//swagger  api 描述方法的简介和详情
 	@ApiOperation(value = "默认调用接口", notes = "测试发布状态")
+	//swagger api 标明文档中所列的返回值的状态码 返回信息 与返回值的类型
 	@ApiResponses({
 			@ApiResponse(code = 200,message = "成功",response = String.class),
 			@ApiResponse(code = 201,message = "成功",response = String.class),
 			@ApiResponse(code = 202,message = "成功",response = String.class)
 	})
+	//拦截post请求
 	@PostMapping({"/index.html", "/", "/index"})
 	@ResponseBody
 	public String index() {
@@ -44,6 +50,7 @@ public class Mobile {
 
 
 	@ApiOperation(value = "测试缓存接口", notes = "缓存查询数据")
+	//swagger api 定义需要输入的参数 参数名 说明 是否必须 参数类型 参数传输方式
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "int", paramType = "path")
 	})
@@ -58,6 +65,7 @@ public class Mobile {
 
 	}
 
+	//rabbitmq 的监听  监听test1队列 当队列中有数据时 自动调用 并消费消息
 	@RabbitListener(queues = "test1")
 	public void receive1(Test a){
 		System.out.println("1收到信息了");
@@ -79,6 +87,7 @@ public class Mobile {
 	 * @param jz
 	 */
 	@ApiOperation(value = "查询所有工序接口", notes = "查询所有工序接口")
+	//hystrix 熔断器api  标明触发熔断是调用什么方法 和超时调用时间 默认貌似是一秒
 	//@HystrixCommand(fallbackMethod = "Fail1", commandProperties = {
 	//		@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000")
 	//})
@@ -176,6 +185,7 @@ public class Mobile {
 	 *
 	 * @return
 	 */
+	//swagger api 忽略该方法 不会再文档中展示该方法
 	@ApiIgnore
 	public QueryPro Fail1() {
 		QueryPro out = new QueryPro();
@@ -206,6 +216,13 @@ public class Mobile {
 		out.setSuccess(false);
 		out.set_MSG_("服务器连接不稳定 请重新操作");
 		return out;
+	}
+
+
+	// 定时任务注解 从任意时间开始 每秒调用一次 周一到周末循环
+	@Scheduled(cron = "*/1 * * * * 0-7")
+	public void TestSeduch() {
+		System.out.println("123");
 	}
 
 }

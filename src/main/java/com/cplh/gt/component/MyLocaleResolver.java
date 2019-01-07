@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 
 /**
+ * 进行国际化资源转换的类
  * Author: liuhongli.
  * Date: 2018/11/5
  */
@@ -24,6 +25,7 @@ public class MyLocaleResolver implements LocaleResolver {
 		//默认 取得是不带国家地区的资源文件
 		Locale locale = Locale.getDefault();
 		String l = request.getParameter("l");
+		//获取访问链接附带的语言标识符
 		if (!StringUtils.isEmpty(l)) {
 			String[] split = l.split("_");
 			locale = new Locale(split[0], split[1]);

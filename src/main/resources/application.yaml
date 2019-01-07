@@ -45,18 +45,18 @@ spring:
     basename: i18n.base   #设置设置国际化文件默认包 文件名
 #关闭模板引擎缓存
   thymeleaf:
-    cache: false
+    cache: false      #关闭末班引擎的缓存
     mode: HTML5
-    encoding: UTF-8
+    encoding: UTF-8   #设置模板引擎编码
   redis:
-   database: 0
+   database: 0        #设置redis使用的数据库
   # host: 192.168.0.113
-   port: 6379
-   host: 192.168.7.243
+   port: 6379         #redis端口
+   host: 192.168.7.243    #redis 地址
 
   output:
     ansi:
-      enabled: always
+      enabled: always       #开启彩色控制台日志
   rabbitmq:
       host: 192.168.7.243
       port: 5672
@@ -65,9 +65,9 @@ spring:
   mail:
     host: smtp.qq.com
     username: 290965350@qq.com
-    password: lhygndwlvkugupbiej
+    password: lhygndwlvkugupbiej    #stmp授权码 邮箱中获取
     properties:
-     mail.stmp.ssl.enable: true
+     mail.stmp.ssl.enable: true     #开启ssl验证
 
 #  resources:
 #    static-locations: classpath:/META-INF/resources/webjars/**
@@ -82,13 +82,13 @@ mybatis:
    cache-enabled: false
 banner:
 #  image:
-##    location: classpath:banner.PNG
+##    location: classpath:banner.PNG      #指定banner图片
 #    width: 60
 #    height: 8
-#    invert: false
-  charset: utf-8
-  location: classpath:banner.txt
-debug: true
+#    invert: false                        #色彩反转
+  charset: utf-8                           #编码
+  location: classpath:banner.txt            #指定banner文字
+debug: true                                 #是否打印详细日志
 #   log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
 
 

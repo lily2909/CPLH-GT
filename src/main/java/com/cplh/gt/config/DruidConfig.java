@@ -14,6 +14,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * druid 配置类
+ */
 @Configuration
 public class DruidConfig {
 
@@ -24,7 +27,8 @@ public class DruidConfig {
     }
 
     //配置Druid的监控
-    //1、配置一个管理后台的Servlet
+    //1、配置一个管理后台的Servlet、、
+    //注册servlet 拦截/druid开头的请求
     @Bean
     public ServletRegistrationBean statViewServlet(){
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
@@ -33,7 +37,7 @@ public class DruidConfig {
         initParams.put("loginUsername","admin");
         initParams.put("loginPassword","123456");
         initParams.put("allow","");//默认就是允许所有访问
-        initParams.put("deny","192.168.15.21");
+        initParams.put("deny","192.168.15.21");  // 拒绝该地址访问本servlet
 
         bean.setInitParameters(initParams);
         return bean;
