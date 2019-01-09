@@ -12,7 +12,11 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * 控制器
@@ -45,6 +49,35 @@ public class Mobile {
 		return "连接成功";
 	}
 
+	/**
+	 * 测试上传文件接口
+	 * @return
+	 */
+	@ApiOperation(value = "上传文件", notes = "不支持断点续传")
+	//swagger api 标明文档中所列的返回值的状态码 返回信息 与返回值的类型
+	@ApiResponses({
+			//@ApiResponse(code = 200,message = "成功",response = String.class),
+			//@ApiResponse(code = 201,message = "成功",response = String.class),
+			//@ApiResponse(code = 202,message = "成功",response = String.class)
+	})
+	//拦截post请求
+	@PostMapping({"/file"})
+	@ResponseBody
+	public String transferFile(MultipartFile file){
+		if (file.isEmpty()) {
+			return "上传失败，请选择文件";
+		}
+
+		String fileName = file.getOriginalFilename();
+		String filePath = "E://";
+		File dest = new File(filePath + fileName);
+		try {
+			file.transferTo(dest);
+			return "上传成功";
+		} catch (IOException e) {
+		}
+		return "上传失败！";
+	}
 
 
 
@@ -220,7 +253,7 @@ public class Mobile {
 
 
 	// 定时任务注解 从任意时间开始 每秒调用一次 周一到周末循环
-	@Scheduled(cron = "*/1 * * * * 0-7")
+	//@Scheduled(cron = "*/1 * * * * 0-7")
 	public void TestSeduch() {
 		System.out.println("123");
 	}
