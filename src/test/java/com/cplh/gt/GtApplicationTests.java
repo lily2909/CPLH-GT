@@ -19,6 +19,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Date;
 
 @RunWith(SpringRunner.class)
@@ -85,6 +87,52 @@ public class GtApplicationTests {
 		javaMailSender.send(mimeMessage);
 	}
 
+	@Test
+	public void contextLoads() throws Exception {
+		File file = new File("E:\\test\\123.txt");
+
+
+		byte[] bytes = new byte[1000];
+		FileInputStream fis = new FileInputStream(file);
+		int a = 1;
+		while (fis.read(bytes) != -1) {
+			System.out.println(bytes.length);
+			FileOutputStream fos = new FileOutputStream(new File("E:\\test\\123("+a+").txt"));
+			fos.write(bytes);
+			bytes =new byte[1000];
+			fos.flush();
+			fos.close();
+			a++;
+		}
+		fis.close();
+
+
+	}
+	@Test
+	public void fileMerge() throws Exception {
+		byte[] bytes = new byte[1000];
+		int flag2;
+		File file1 = new File("E:\\test\\123(1).txt");
+		FileInputStream fis1 = new FileInputStream(file1);
+		File file2 = new File("E:\\test\\123(2).txt");
+		FileInputStream fis2 = new FileInputStream(file2);
+		FileOutputStream fos = new FileOutputStream(new File("E:\\test\\123(new).txt"));
+
+		while ((flag2 = fis1.read(bytes)) != -1) {
+			System.out.println(bytes.length);
+			fos.write(bytes,0,flag2);
+			bytes =new byte[1000];
+		}
+		while ((flag2 = fis2.read(bytes)) != -1) {
+			System.out.println(bytes.length);
+			fos.write(bytes,0,flag2);
+			bytes =new byte[1000];
+		}
+		fis1.close();
+		fis2.close();
+		fos.flush();
+		fos.close();
+	}
 
 
 
