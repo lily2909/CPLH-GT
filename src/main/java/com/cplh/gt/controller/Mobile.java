@@ -10,12 +10,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
@@ -24,7 +27,7 @@ import java.io.IOException;
  * Date: 2018/11/5
  */
 //swagger api 标明这个方法需要生成文档
-@Api(value = "现场验收 展示调用controller",description = "现场验收 展示调用controller",hidden = true)
+@Api(value = "现场验收 展示调用controller", description = "现场验收 展示调用controller", hidden = true)
 //标明这是个controller 并且返回的都是json数据
 @RestController
 public class Mobile {
@@ -38,12 +41,12 @@ public class Mobile {
 	@ApiOperation(value = "默认调用接口", notes = "测试发布状态")
 	//swagger api 标明文档中所列的返回值的状态码 返回信息 与返回值的类型
 	@ApiResponses({
-			@ApiResponse(code = 200,message = "成功",response = String.class),
-			@ApiResponse(code = 201,message = "成功",response = String.class),
-			@ApiResponse(code = 202,message = "成功",response = String.class)
+			@ApiResponse(code = 200, message = "成功", response = String.class),
+			@ApiResponse(code = 201, message = "成功", response = String.class),
+			@ApiResponse(code = 202, message = "成功", response = String.class)
 	})
 	//拦截post请求
-	@PostMapping({"/index.html", "/", "/index"})
+	@PostMapping({"/index.html", "/index"})
 	@ResponseBody
 	public String index() {
 		return "连接成功";
@@ -51,6 +54,7 @@ public class Mobile {
 
 	/**
 	 * 测试上传文件接口
+	 *
 	 * @return
 	 */
 	@ApiOperation(value = "上传文件", notes = "不支持断点续传")
@@ -63,7 +67,7 @@ public class Mobile {
 	//拦截post请求
 	@PostMapping({"/file"})
 	@ResponseBody
-	public String transferFile(MultipartFile file){
+	public String transferFile(MultipartFile file) {
 		if (file.isEmpty()) {
 			return "上传失败，请选择文件";
 		}
@@ -80,6 +84,32 @@ public class Mobile {
 	}
 
 
+	/**
+	 * 测试文件下载接口
+	 *
+	 * @return
+	 */
+	@ApiOperation(value = "下载文件", notes = "不支持断点续传")
+	//swagger api 标明文档中所列的返回值的状态码 返回信息 与返回值的类型
+	@ApiResponses({
+			//@ApiResponse(code = 200,message = "成功",response = String.class),
+			//@ApiResponse(code = 201,message = "成功",response = String.class),
+			//@ApiResponse(code = 202,message = "成功",response = String.class)
+	})
+	//拦截post请求
+	@PostMapping({"/downloadFile"})
+	@ResponseBody
+	public String downloadFile(String range, String fileName, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println(range + fileName);
+		byte[] bytes = new byte[500 * 1024];
+		int flag1 = 0;
+		BufferedOutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
+		FileInputStream fis = new FileInputStream(new File("E:\\test\\" + fileName));
+		while ((flag1 = fis.read(bytes)) != -1) {
+			outputStream.write(bytes, 0, flag1);
+		}
+		return "下载完成！";
+	}
 
 
 	@ApiOperation(value = "测试缓存接口", notes = "缓存查询数据")
@@ -92,7 +122,7 @@ public class Mobile {
 	public Test indexAaa(@PathVariable Integer id) {
 
 		Test a = gtService.getTest(id);
-		rabbitTemplate.convertAndSend("test.fanout","123",a);
+		rabbitTemplate.convertAndSend("test.fanout", "123", a);
 		System.out.println();
 		return a;
 
@@ -100,13 +130,14 @@ public class Mobile {
 
 	//rabbitmq 的监听  监听test1队列 当队列中有数据时 自动调用 并消费消息
 	@RabbitListener(queues = "test1")
-	public void receive1(Test a){
+	public void receive1(Test a) {
 		System.out.println("1收到信息了");
 		System.out.println(a);
 
 	}
+
 	@RabbitListener(queues = "test1")
-	public void receive2(Test a){
+	public void receive2(Test a) {
 		System.out.println("2收到信息了");
 		System.out.println(a);
 
@@ -131,7 +162,7 @@ public class Mobile {
 
 		logger.info("查询所有工序");
 		QueryPro queryPro = gtService.queryPro();
-		long l2= System.currentTimeMillis();
+		long l2 = System.currentTimeMillis();
 		long l1 = l2 - l;
 		queryPro.set_MSG_(String.valueOf(l1));
 		return queryPro;
@@ -160,7 +191,7 @@ public class Mobile {
 
 		logger.info("查询工序详细数据接口,当前查询为" + layer + " 工序的 " + hjCode + "焊机" + weldCode + "焊口");
 		QueryPro queryPro = gtService.clickPro(layer, hjCode, weldCode);
-		long l2= System.currentTimeMillis();
+		long l2 = System.currentTimeMillis();
 		long l1 = l2 - l;
 		queryPro.set_MSG_(String.valueOf(l1));
 		return queryPro;
@@ -176,7 +207,7 @@ public class Mobile {
 	//})
 	@ApiOperation(value = "返回验收所有数据的接口", notes = "返回验收所有数据的接口")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "weldCode", value = "焊口标号", required = true, dataType = "String", paramType = "path",example = "123")
+			@ApiImplicitParam(name = "weldCode", value = "焊口标号", required = true, dataType = "String", paramType = "path", example = "123")
 	})
 	@PostMapping("/info/{weldCode}")
 	@ResponseBody
@@ -184,7 +215,7 @@ public class Mobile {
 		long l = System.currentTimeMillis();
 		logger.info("查询验收详细数据接口,当前查询焊口为" + weldCode);
 		YsInfo queryPro = gtService.info(weldCode);
-		long l2= System.currentTimeMillis();
+		long l2 = System.currentTimeMillis();
 		long l1 = l2 - l;
 		queryPro.set_msg_(String.valueOf(l1));
 		return queryPro;
