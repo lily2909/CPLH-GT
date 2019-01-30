@@ -1,5 +1,6 @@
 package com.cplh.gt;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.core.AmqpAdmin;
@@ -9,13 +10,12 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.test.context.junit4.SpringRunner;
+import com.test.pro.service.UserService;
 
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
@@ -29,10 +29,13 @@ import java.util.Date;
 public class GtApplicationTests {
 	@Autowired
 	StringRedisTemplate redisTemplate;
-	@Autowired
-	RedisTemplate redisTemplate1;
+	//@Autowired
+	//RedisTemplate redisTemplate1;
 	@Autowired
 	RabbitTemplate rabbitTemplatel;
+
+	@Reference
+	UserService userService;
 
 	@Autowired
 	AmqpAdmin amqpAdmin;
@@ -41,10 +44,12 @@ public class GtApplicationTests {
 
 	@Test
 	public void testString() {
-		ValueOperations<String, String> stringStringValueOperations = redisTemplate.opsForValue();
-		for (int i = 0; i < 10; i++) {
-			stringStringValueOperations.set(String.valueOf(Math.random()), String.valueOf(Math.random()));
-		}
+		String user = userService.getUser();
+		System.out.println(user);
+		//ValueOperations<String, String> stringStringValueOperations = redisTemplate.opsForValue();
+		//for (int i = 0; i < 10; i++) {
+		//	stringStringValueOperations.set(String.valueOf(Math.random()), String.valueOf(Math.random()));
+		//}
 
 	}
 

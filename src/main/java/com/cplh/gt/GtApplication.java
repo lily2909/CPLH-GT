@@ -1,5 +1,6 @@
 package com.cplh.gt;
 
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
@@ -8,6 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+@EnableDubbo
 @EnableCircuitBreaker           //开启熔断器
 //@EnableHystrixDashboard       //开启熔断器
 @SpringBootApplication          //标明这是springboot启动类

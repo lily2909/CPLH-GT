@@ -193,7 +193,17 @@
             <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
             <!--<version>1.4.6.RELEASE</version>-->
         <!--</dependency>-->
-
+        <!--dubbo zookeeoper-->
+        <dependency>
+            <groupId>com.alibaba.spring.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.1</version>
+        </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>

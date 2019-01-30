@@ -28,7 +28,7 @@ spring:
     testOnBorrow: false
     testOnReturn: false
     poolPreparedStatements: true
-    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙`
     filters: stat,wall,log4j
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
@@ -91,6 +91,12 @@ banner:
 debug: true                                 #是否打印详细日志
 #   log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
 
+dubbo:
+  application:
+    name : consum
+  registry:
+    address: zookeeper://192.168.7.243:2181
+
 
 
 ---
@@ -134,4 +140,3 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8
     driver-class-name: com.mysql.jdbc.Driver
-

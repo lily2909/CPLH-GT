@@ -5,6 +5,7 @@ package com.cplh.gt.service;
  * Date: 2018/11/16
  */
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.cplh.gt.bean.*;
 import com.cplh.gt.bean.Process;
 import com.cplh.gt.dao.*;
@@ -22,6 +23,8 @@ import java.util.*;
  */
 @Service
 public class GtService {
+
+
 	@Autowired
 	HjInfoDao hjInfoDao;
 	@Autowired
