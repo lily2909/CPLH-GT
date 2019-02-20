@@ -169,6 +169,14 @@
             <optional>true</optional>
         </dependency>
 
+        <!--监控管理-->
+
+        <dependency>
+            <!--Spring 官方提供的热部署插件 -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!--引入hystrix熔断器 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

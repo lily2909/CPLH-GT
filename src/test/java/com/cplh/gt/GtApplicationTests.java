@@ -44,8 +44,8 @@ public class GtApplicationTests {
 
 	@Test
 	public void testString() {
-		String user = userService.getUser();
-		System.out.println(user);
+		//String user = userService.getUser();
+		//System.out.println(user);
 		//ValueOperations<String, String> stringStringValueOperations = redisTemplate.opsForValue();
 		//for (int i = 0; i < 10; i++) {
 		//	stringStringValueOperations.set(String.valueOf(Math.random()), String.valueOf(Math.random()));

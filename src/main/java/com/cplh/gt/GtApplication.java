@@ -9,7 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@EnableDubbo
+//@EnableDubbo                  //开启dubbo
 @EnableCircuitBreaker           //开启熔断器
 //@EnableHystrixDashboard       //开启熔断器
 @SpringBootApplication          //标明这是springboot启动类
