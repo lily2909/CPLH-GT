@@ -42,17 +42,27 @@ public class GtApplicationTests {
 	@Autowired
 	JavaMailSenderImpl javaMailSender;
 
+	/**
+	 * dubbo调用测试
+	 * 测试redis缓存
+	 */
 	@Test
 	public void testString() {
+
+
 		//String user = userService.getUser();
 		//System.out.println(user);
+
+
 		//ValueOperations<String, String> stringStringValueOperations = redisTemplate.opsForValue();
 		//for (int i = 0; i < 10; i++) {
 		//	stringStringValueOperations.set(String.valueOf(Math.random()), String.valueOf(Math.random()));
 		//}
-
 	}
 
+	/**
+	 * 测试rebbitmq 自定义绑定规则
+	 */
 	@Test
 	public void test1() {
 		amqpAdmin.declareExchange(new FanoutExchange("amqpadmin.fanout.exchange"));
@@ -63,6 +73,9 @@ public class GtApplicationTests {
 		rabbitTemplatel.convertAndSend("amqpadmin.fanout.exchange", "666", new com.cplh.gt.bean.Test("4", "小汪汪"));
 	}
 
+	/**
+	 * 测试简单邮件发送
+	 */
 	@Test
 	public void testSimpMail() {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -79,6 +92,10 @@ public class GtApplicationTests {
 	}
 
 
+	/**
+	 * 测试带附件邮件发送
+	 * @throws Exception
+	 */
 	@Test
 	public void testMineMail() throws Exception {
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -96,6 +113,10 @@ public class GtApplicationTests {
 		javaMailSender.send(mimeMessage);
 	}
 
+	/**
+	 * 测试分割文件储存
+	 * @throws Exception
+	 */
 	@Test
 	public void fileSplit() throws Exception {
 		File file = new File("E:\\test\\xdoclet-1.2.1.zip");
@@ -120,6 +141,10 @@ public class GtApplicationTests {
 
 	}
 
+	/**
+	 * 测试分包文件合并
+	 * @throws Exception
+	 */
 	@Test
 	public void fileMerge() throws Exception {
 		byte[] bytes = new byte[1000*1024];

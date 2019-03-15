@@ -576,6 +576,11 @@ public class GtService {
 		}
 	}
 
+	/**
+	 * 测试缓存
+	 * @param id
+	 * @return
+	 */
 	//@Cacheable("test")
 	@CachePut("test")
 	public Test getTest(Integer id) {

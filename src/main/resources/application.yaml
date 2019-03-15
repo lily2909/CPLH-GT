@@ -7,7 +7,7 @@ server:
 spring:
   profiles:
 #    active: postgres_test      #设置启动哪一个配置
-    active: postgres_dev      #设置启动哪一个配置
+    active: mysql      #设置启动哪一个配置
   jpa:
    hibernate:
     ddl-auto: update
@@ -65,7 +65,7 @@ spring:
   mail:
     host: smtp.qq.com
     username: 290965350@qq.com
-    password: lhygndwlvkugupbiej    #stmp授权码 邮箱中获取
+    password: hygndwlvkugupbiej    #stmp授权码 邮箱中获取
     properties:
      mail.stmp.ssl.enable: true     #开启ssl验证
 

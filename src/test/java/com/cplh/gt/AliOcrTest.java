@@ -45,10 +45,14 @@ import java.util.Map;
 @SpringBootTest
 public class AliOcrTest {
 
+	/**
+	 * 连接阿里ocr图片文字识别功能
+	 * @throws IOException
+	 */
 	@Test
 	public void test() throws IOException {
 
-		File file = new File("E:\\123.png");
+		File file = new File("E:\\123.jpg");
 		FileInputStream fileInputStream = new FileInputStream(file);
 		byte[] bytes = new byte[(int) file.length()];
 		 fileInputStream.read(bytes);
@@ -75,6 +79,7 @@ public class AliOcrTest {
 		for (Map.Entry<String, String> e : headers.entrySet()) {
 			request.addHeader(e.getKey(), e.getValue());
 		}
+		// 在request中添加body post提交参数
 		request.setEntity(new StringEntity(bodys, "utf-8"));
 
 		HttpResponse execute = httpClient.execute(request);
@@ -82,6 +87,11 @@ public class AliOcrTest {
 		prase(EntityUtils.toString(execute.getEntity()));
 
 	}
+
+	/**
+	 * 将字符串转换为对象
+	 * @param string
+	 */
 	public static void prase(String string){
 		JSONObject jsonObject=JSONObject.parseObject(string);
 		JSONArray jsonArray=jsonObject.getJSONArray("prism_wordsInfo");
@@ -94,6 +104,11 @@ public class AliOcrTest {
 		}
 	}
 
+	/**
+	 * 返回一个http连接对象
+	 * @param host
+	 * @return
+	 */
 	private static HttpClient wrapClient(String host) {
 		HttpClient httpClient = new DefaultHttpClient();
 		if (host.startsWith("https://")) {
@@ -104,6 +119,11 @@ public class AliOcrTest {
 
 		return httpClient;
 	}
+
+	/**
+	 * 创建一个ssl的clent
+	 * @param httpClient
+	 */
 	private static void sslClient(HttpClient httpClient) {
 		try {
 			SSLContext ctx = SSLContext.getInstance("TLS");
@@ -130,6 +150,15 @@ public class AliOcrTest {
 			throw new RuntimeException(ex);
 		}
 	}
+
+	/**
+	 * 创建url
+	 * @param host  主机地址
+	 * @param path  连接路径
+	 * @param querys    提交参数
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 
 	private static String buildUrl(String host, String path, Map<String, String> querys) throws UnsupportedEncodingException {
 		StringBuilder sbUrl = new StringBuilder();
