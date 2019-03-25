@@ -35,11 +35,14 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
   application:
     name: hystrix-dashboard
+  http:
+    multipart:
+      max-file-size: 10mb
+      max-request-size: 100mb
 #    initialization-mode: always
 
   #    schema:
   #    - classpath:department.sql   #设置初始化脚本名称
-
   #设置国际化默认文件名
   messages:
     basename: i18n.base   #设置设置国际化文件默认包 文件名
@@ -103,7 +106,6 @@ info:
   ceshi:
     asd
     dsa
-
 
 ---
 spring:

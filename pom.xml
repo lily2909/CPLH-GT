@@ -26,6 +26,7 @@
         <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
         <thymeleaf-layout-dialect.version>2.3.0</thymeleaf-layout-dialect.version>
     </properties>
+    d
 
     <dependencies>
         <!--引入获取图片信息jar-->
@@ -126,10 +127,10 @@
             <version>1.2.0</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>postgresql</groupId>-->
-            <!--<artifactId>postgresql</artifactId>-->
-            <!--<version>9.1-901-1.jdbc4</version>-->
-            <!--&lt;!&ndash;<version>9.3-1102-jdbc4</version>&ndash;&gt;-->
+        <!--<groupId>postgresql</groupId>-->
+        <!--<artifactId>postgresql</artifactId>-->
+        <!--<version>9.1-901-1.jdbc4</version>-->
+        <!--&lt;!&ndash;<version>9.3-1102-jdbc4</version>&ndash;&gt;-->
         <!--</dependency>-->
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
@@ -177,9 +178,7 @@
         </dependency>
 
         <!--监控管理-->
-
         <dependency>
-            <!--Spring 官方提供的热部署插件 -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
             <optional>true</optional>
@@ -190,23 +189,30 @@
             <artifactId>spring-cloud-starter-hystrix</artifactId>
             <version>1.4.6.RELEASE</version>
         </dependency>
+
+        <!--引入aop编程-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <!--引入hystrix dashboard(仪表盘)-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>-->
-            <!--&lt;!&ndash;<scope>runtime</scope>&ndash;&gt;-->
-            <!--<version>1.4.6.RELEASE</version>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>-->
+        <!--&lt;!&ndash;<scope>runtime</scope>&ndash;&gt;-->
+        <!--<version>1.4.6.RELEASE</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
-            <!--<version>1.4.6.RELEASE</version>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
+        <!--<version>1.4.6.RELEASE</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
-            <!--<version>1.4.6.RELEASE</version>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
+        <!--<version>1.4.6.RELEASE</version>-->
         <!--</dependency>-->
         <!--dubbo zookeeoper-->
         <dependency>

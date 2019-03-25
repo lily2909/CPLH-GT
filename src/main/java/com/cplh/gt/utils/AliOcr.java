@@ -43,11 +43,12 @@ public class AliOcr {
 	 * 连接阿里ocr图片文字识别功能
 	 * @throws IOException
 	 */
-	public void test() throws IOException {
+	public static String covent(FileInputStream fileInputStream,Integer size) throws IOException {
 
-		File file = new File("E:\\123.jpg");
-		FileInputStream fileInputStream = new FileInputStream(file);
-		byte[] bytes = new byte[(int) file.length()];
+		//File file = new File("E:\\123.jpg");
+		//FileInputStream fileInputStream = new FileInputStream(file);
+
+		byte[] bytes = new byte[size];
 		 fileInputStream.read(bytes);
 		bytes = Base64.encode(bytes);
 		String image = new String(bytes);
@@ -77,7 +78,8 @@ public class AliOcr {
 
 		HttpResponse execute = httpClient.execute(request);
 		System.out.println(execute.toString());
-		prase(EntityUtils.toString(execute.getEntity()));
+		String prase = prase(EntityUtils.toString(execute.getEntity()));
+		return prase;
 
 	}
 
@@ -85,16 +87,19 @@ public class AliOcr {
 	 * 将字符串转换为对象
 	 * @param string
 	 */
-	public static void prase(String string){
+	public static String prase(String string){
 		JSONObject jsonObject=JSONObject.parseObject(string);
 		JSONArray jsonArray=jsonObject.getJSONArray("prism_wordsInfo");
+		StringBuilder stringBuilder = new StringBuilder();
 		for (int i=0;i<jsonArray.size();i++){
 			JSONObject newjsonObject=(JSONObject) jsonArray.get(i);
 			String word = newjsonObject.getString("word");
+			stringBuilder.append(word);
+			stringBuilder.append("\n");
 			System.out.println(word);
-
 			//output(newjsonObject.getString("word"));
 		}
+	return 	stringBuilder.toString();
 	}
 
 	/**

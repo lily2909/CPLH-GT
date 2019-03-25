@@ -4,6 +4,7 @@ import com.cplh.gt.bean.QueryPro;
 import com.cplh.gt.bean.Test;
 import com.cplh.gt.bean.YsInfo;
 import com.cplh.gt.service.GtService;
+import com.cplh.gt.utils.AliOcr;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +18,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * 控制器
@@ -47,9 +45,9 @@ public class Mobile {
 			@ApiResponse(code = 202, message = "成功", response = String.class)
 	})
 	//拦截post请求
-	@PostMapping({"/index.html", "/index"})
-	@ResponseBody
-	public String index() {
+	@GetMapping({"/index.html", "/index"})
+	public String index() throws FileNotFoundException {
+			//throw new FileNotFoundException();
 		return "连接成功";
 	}
 
@@ -68,20 +66,31 @@ public class Mobile {
 	//拦截post请求
 	@PostMapping({"/file"})
 	@ResponseBody
-	public String transferFile(MultipartFile file) {
+	public String transferFile(MultipartFile file) throws IOException {
 		if (file.isEmpty()) {
 			return "上传失败，请选择文件";
 		}
+		if (file.getOriginalFilename().endsWith(".png") ||file.getOriginalFilename().endsWith(".jpg")||file.getOriginalFilename().endsWith(".jpeg")) {
 
-		String fileName = file.getOriginalFilename();
-		String filePath = "E://";
-		File dest = new File(filePath + fileName);
-		try {
-			file.transferTo(dest);
-			return "上传成功";
-		} catch (IOException e) {
+			//获取文件大小
+			long size = file.getSize();
+			//获取文件输入流
+			FileInputStream inputStream = (FileInputStream) file.getInputStream();
+			//转换数据 打印到控制台
+			String covent = AliOcr.covent(inputStream, (int) size);
+
+			//String fileName = file.getOriginalFilename();
+			//String filePath = "E://";
+			//File dest = new File(filePath + fileName);
+			//try {
+			//file.transferTo(dest);
+			return "上传成功 内容为：\n" + covent;
+			//} catch (IOException e) {
+			//}
+			//return "上传失败！";
+		}else {
+			return "请上传图片";
 		}
-		return "上传失败！";
 	}
 
 

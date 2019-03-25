@@ -1,12 +1,11 @@
 package com.cplh.gt;
 
-import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 //@EnableDubbo                  //开启dubbo
@@ -21,5 +20,4 @@ public class GtApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GtApplication.class, args);
 	}
-
 }
